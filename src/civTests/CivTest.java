@@ -108,13 +108,14 @@ public class CivTest {
 	@Test
 	public void researchTest()
 	{
-		assertEquals(0, civ.getNumberofTechs());
-		civ.researchNewTech("Iron Working");
+		// when game initializes the first tech (should be researched)
+		assertEquals(1, civ.getNumberofTechs());
+		civ.researchNewTech("Pottery");
 		for(int i = 0; i < 7; i++)
 		{
 			game.nextTurn();
 		}
-		assertEquals(1, civ.getNumberofTechs());
+		assertEquals(2, civ.getNumberofTechs());
 	}
 	
 }

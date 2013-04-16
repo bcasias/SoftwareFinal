@@ -10,11 +10,13 @@ public class TechTree {
 	
 	private Map<Tech, ArrayList<Tech> > techTree;
 	private Tech researchingTech;
+	private int numTechsUnlocked;
 	
 	public TechTree()
 	{
 		techTree = new HashMap<Tech, ArrayList<Tech> >();
 		researchingTech = null;
+		numTechsUnlocked = 0;
 	}
 	
 	// This adds a Tech to the tech tree
@@ -39,6 +41,10 @@ public class TechTree {
 				= (Map.Entry<Tech, ArrayList<Tech> >)map_it.next();
 			if(pairs.getKey().getTechName().equals(techName))
 			{
+				if(!pairs.getKey().isLocked())
+				{
+					return false;
+				}
 				for(Tech t : pairs.getValue() )
 				{
 					if(t.isLocked())
@@ -78,8 +84,14 @@ public class TechTree {
 			if(!researchingTech.isLocked())
 			{
 				researchingTech = null;
+				++numTechsUnlocked;
 			}
 		}
+	}
+	
+	public int getNumberOfTechs()
+	{
+		return numTechsUnlocked;
 	}
 	
 	public static void main(String[] args)
@@ -168,7 +180,7 @@ public class TechTree {
 			techTree.update();
 		}
 		
-		// research masonary
+		// research masonry
 		if(!techTree.researchNewTech("Masonary"))
 		{
 			System.out.println("Failed to research Masonary");
@@ -196,7 +208,24 @@ public class TechTree {
 			allTestsPass = false;
 		}
 		
-		if(techTree.isTechUnlocked("Construction") && allTestsPass)
+		// tests to see if a tech is unlocked could be researched multiple times
+		techTree.researchNewTech("Construction");
+		for(int i = 0; i < 4; i++)
+		{
+			techTree.update();
+		}
+		techTree.researchNewTech("Construction");
+		for(int i = 0; i < 4; i++)
+		{
+			techTree.update();
+		}
+		techTree.researchNewTech("Construction");
+		for(int i = 0; i < 4; i++)
+		{
+			techTree.update();
+		}
+		
+		if(techTree.isTechUnlocked("Construction") && allTestsPass && techTree.getNumberOfTechs() == 6)
 			System.out.println("All tests passed.");
 	}
 }
