@@ -58,6 +58,7 @@ public class GameManagerTests {
 		assertTrue(game.gameEnd());
 	}
 	
+	@Test
 	public void resourceWin()
 	{
 		assertEquals(100, civ.getGoldCount());
@@ -71,5 +72,4 @@ public class GameManagerTests {
 		game.nextTurn();
 		assertTrue(game.gameEnd());
 	}
-	
 }
