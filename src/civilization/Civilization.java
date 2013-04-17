@@ -8,6 +8,11 @@ import buildings.City;
 public class Civilization {
 	private ArrayList<City> cities;
 	
+	public Civilization()
+	{
+		
+	}
+	
 	public boolean makeBuilding(Building building) {
 		// TODO Auto-generated method stub
 		return false;

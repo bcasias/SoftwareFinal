@@ -10,7 +10,7 @@ public abstract class Land {
 	
 	public Land()
 	{
-
+		
 	}
 	
 	public char getInitial() {
