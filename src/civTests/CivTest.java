@@ -4,16 +4,18 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
+import land.Land;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert.*;
 
-import sticksAndStones.City;
-import sticksAndStones.Civilization;
+import civilization.Civilization;
+
+import buildings.City;
+import buildings.TradingPost;
+
 import sticksAndStones.GameManager;
-import sticksAndStones.Land;
-import sticksAndStones.TradingPost;
 
 public class CivTest {
 	private GameManager game;

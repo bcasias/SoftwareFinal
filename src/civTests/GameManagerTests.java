@@ -5,13 +5,16 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import land.Land;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import sticksAndStones.City;
-import sticksAndStones.Civilization;
+import civilization.Civilization;
+
+import buildings.City;
+
 import sticksAndStones.GameManager;
-import sticksAndStones.Land;
 
 public class GameManagerTests {
 	private GameManager game;

@@ -2,6 +2,10 @@ package sticksAndStones;
 
 import java.util.ArrayList;
 
+import civilization.Civilization;
+
+import land.Land;
+
 
 public class GameManager {
 	private ArrayList<ArrayList<Land> > map;

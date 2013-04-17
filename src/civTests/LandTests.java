@@ -5,15 +5,16 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
+import land.Land;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert.*;
 
-import sticksAndStones.Building;
-import sticksAndStones.City;
+import buildings.Building;
+import buildings.City;
+
 import sticksAndStones.GameManager;
-import sticksAndStones.Land;
 
 public class LandTests {
 	GameManager game;
