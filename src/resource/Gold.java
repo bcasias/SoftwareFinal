@@ -4,6 +4,6 @@ public class Gold extends Resource{
 
 	public Gold()
 	{
-		super();
+		super('g');
 	}
 }

@@ -4,6 +4,9 @@ public class Mountain extends Land {
 
 	public Mountain()
 	{
-		super();
+		super('M');
+	}
+	public Mountain(boolean river) {
+		super('H',false);
 	}
 }

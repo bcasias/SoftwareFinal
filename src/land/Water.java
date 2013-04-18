@@ -4,6 +4,10 @@ public class Water extends Land {
 
 	public Water()
 	{
-		super();
+		super('W');
+	}
+	
+	public Water(boolean river) {
+		super('H',false);
 	}
 }
