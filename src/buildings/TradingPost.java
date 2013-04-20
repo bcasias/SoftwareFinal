@@ -5,6 +5,6 @@ public class TradingPost extends Building {
 
 	public TradingPost()
 	{
-		super();
+		super(3, 3, 1);
 	}
 }

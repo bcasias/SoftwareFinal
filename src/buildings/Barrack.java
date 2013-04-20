@@ -4,6 +4,6 @@ public class Barrack extends Building{
 
 	public Barrack()
 	{
-		super();
+		super(2, 2, 2);
 	}
 }

@@ -2,6 +2,8 @@ package sticksAndStones;
 
 import java.util.ArrayList;
 
+import buildings.City;
+
 import civilization.Civilization;
 
 import land.Land;
@@ -10,11 +12,13 @@ import land.Land;
 public class GameManager {
 	private ArrayList<ArrayList<Land> > map;
 	private Civilization playerCiv;
+	int turn;
 	
 	public GameManager()
 	{
 		map = new ArrayList<ArrayList<Land> >();
 		playerCiv = new Civilization();
+		turn = 0;
 	}
 	
 	/* All of these functions are for testing */
@@ -25,17 +29,22 @@ public class GameManager {
 	}
 
 	public Civilization getPlayerCiv() {
-		// TODO Auto-generated method stub
-		return null;
+		return playerCiv;
 	}
 
 	public void nextTurn() {
+		int foodConsumed = 0;
+		for (City c : playerCiv.getCities()) {
+			foodConsumed += c.getPop(); //each population consumes one food
+		}
+		playerCiv.forceFood(playerCiv.getFoodCount() - foodConsumed);
+		turn++;
 		// TODO Auto-generated method stub
 		
 	}
 
 	public void forceTurn(int i) {
-		// TODO Auto-generated method stub
+		turn = i;
 		
 	}
 

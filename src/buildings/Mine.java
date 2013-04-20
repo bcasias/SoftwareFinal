@@ -4,6 +4,6 @@ public class Mine extends Building{
 
 	public Mine()
 	{
-		super();
+		super(3, 1, 0);
 	}
 }

@@ -3,18 +3,24 @@ package buildings;
 
 public class City extends Building {
 	public enum CityType {VILLAGE, TOWN, CITY}
+	private int pop;
 
 	public City()
 	{
-		super();
+		super(5, 5, 5);
+		pop = 1;
 	}
 	public void forcePopulation(int i) {
-		// TODO Auto-generated method stub
+		pop = i;
 	}
 
 	public CityType getCityType() {
-		// TODO Auto-generated method stub
-		return null;
+		if (pop >= 10) return CityType.CITY;
+		else if (pop >= 5) return CityType.TOWN;
+		else return CityType.VILLAGE;
+	}
+	public int getPop() {
+		return pop;
 	}
 
 }

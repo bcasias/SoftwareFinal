@@ -7,10 +7,16 @@ import buildings.City;
 
 public class Civilization {
 	private ArrayList<City> cities;
+	private int goldCount, foodCount, stoneCount, woodCount;
+	private int happiness;
 	
 	public Civilization()
 	{
-		
+		goldCount = 100;
+		foodCount = 100;
+		stoneCount = 100;
+		woodCount = 100;
+		happiness = 10;
 	}
 	
 	public boolean makeBuilding(Building building) {
@@ -19,60 +25,53 @@ public class Civilization {
 	}
 
 	public int getGoldCount() {
-		// TODO Auto-generated method stub
-		return -1;
+		return goldCount;
 	}
 
 	public int getWoodCount() {
-		// TODO Auto-generated method stub
-		return -1;
+		return woodCount;
 	}
 
 	public int getStoneCount() {
-		// TODO Auto-generated method stub
-		return -1;
+		return stoneCount;
 	}
 	
+	public int getFoodCount() {
+		return foodCount;
+	}
 	// for test
 	
 	public ArrayList<City> getCities()
 	{
-		// TODO
-		return null;
+		return cities;
 	}
 
 	public void forceFood(int i) {
-		// TODO Auto-generated method stub
+		foodCount = i;
 		
 	}
 
-	public boolean getHappiness() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public int getFoodCount() {
-		// TODO Auto-generated method stub
-		return -1;
+	public int getHappiness() {
+		return happiness;
 	}
 
 	public void forceHappiness(int i) {
-		// TODO Auto-generated method stub
+		happiness = i;
 		
 	}
 
 	public void forceGold(int i) {
-		// TODO Auto-generated method stub
+		goldCount = i;
 		
 	}
 
 	public void forceWood(int i) {
-		// TODO Auto-generated method stub
+		woodCount = i;
 		
 	}
 
 	public void forceStone(int i) {
-		// TODO Auto-generated method stub
+		stoneCount = i;
 		
 	}
 

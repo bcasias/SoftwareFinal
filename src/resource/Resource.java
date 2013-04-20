@@ -15,4 +15,9 @@ public abstract class Resource {
 		rtn += initial;
 		return rtn;
 	}
+
+	public char getInitial() {
+		return initial;
+	}
+	
 }

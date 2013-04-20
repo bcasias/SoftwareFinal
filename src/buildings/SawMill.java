@@ -4,6 +4,6 @@ public class SawMill extends Building {
 
 	public SawMill()
 	{
-		super();
+		super(1, 2, 0);
 	}
 }

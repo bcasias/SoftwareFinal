@@ -40,17 +40,17 @@ public abstract class Land {
 
 	public boolean hasResource()
 	{
-		// TODO
+		if (resource != null) return true;
 		return false;
 	}
 	public char getResourceInitial()
 	{
-		// TODO
-		return 0;
+		if (hasResource()) return resource.getInitial();
+		return 'n';
 	}
 
 	public Building getBuilding() {
-		// TODO Auto-generated method stub
+		if (building != null) return building;
 		return null;
 	}
 
