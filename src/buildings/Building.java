@@ -10,4 +10,16 @@ public abstract class Building {
 		stoneCost = stone;
 		goldCost = gold;
 	}
+
+	public int getWoodCost() {
+		return woodCost;
+	}
+
+	public int getGoldCost() {
+		return goldCost;
+	}
+
+	public int getStoneCost() {
+		return stoneCost;
+	}
 }

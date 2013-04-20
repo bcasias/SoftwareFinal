@@ -22,14 +22,14 @@ public class TechTree {
 	
 	// This adds a Tech to the tech tree
 	// dependentTechs come in as an array
-	public void addTech(Tech techology, Tech ... dependentTechs)
+	public void addTech(Tech technology, Tech ... dependentTechs)
 	{
 		ArrayList<Tech> techs = new ArrayList<Tech>();
 		for(Tech t : dependentTechs)
 		{
 			techs.add(t);
 		}
-		techTree.put(techology, techs);
+		techTree.put(technology, techs);
 	}
 	
 	public boolean researchNewTech(String techName)
@@ -117,17 +117,17 @@ public class TechTree {
 		Tech animal = new Tech("Animal", 4);
 		Tech archery = new Tech("Archery", 4);
 		Tech mining = new Tech("Mining", 4);
-		Tech masonary = new Tech("Masonary",4);
+		Tech masonry = new Tech("Masonry",4);
 		Tech construction = new Tech("Construction", 4);
-		Tech weel = new Tech("Weel", 4);
+		Tech wheel = new Tech("Wheel", 4);
 		
 		techTree.addTech(pottery, agriculture);
 		techTree.addTech(animal, agriculture);
 		techTree.addTech(archery, agriculture);
 		techTree.addTech(mining, agriculture);
-		techTree.addTech(weel, archery);
-		techTree.addTech(masonary, mining);
-		techTree.addTech(construction, weel, masonary);
+		techTree.addTech(wheel, archery);
+		techTree.addTech(masonry, mining);
+		techTree.addTech(construction, wheel, masonry);
 		
 		// research basic 
 		if(!techTree.researchNewTech("Agriculture"))
@@ -149,7 +149,7 @@ public class TechTree {
 		// check for fail
 		if(techTree.researchNewTech("Construction"))
 		{
-			System.out.println("constrction was researched before permitted");
+			System.out.println("Consturction was researched before permitted");
 			allTestsPass = false;
 		}
 		
@@ -159,10 +159,10 @@ public class TechTree {
 			allTestsPass = false;
 		}
 		
-		// research weel
-		if(!techTree.researchNewTech("Weel"))
+		// research wheel
+		if(!techTree.researchNewTech("Wheel"))
 		{
-			System.out.println("Failed to research Weel");
+			System.out.println("Failed to research Wheel");
 			allTestsPass = false;
 		}
 		for(int i = 0; i < 4; i++)
@@ -182,9 +182,9 @@ public class TechTree {
 		}
 		
 		// research masonry
-		if(!techTree.researchNewTech("Masonary"))
+		if(!techTree.researchNewTech("Masonry"))
 		{
-			System.out.println("Failed to research Masonary");
+			System.out.println("Failed to research Masonry");
 			allTestsPass = false;
 		}
 		for(int i = 0; i < 4; i++)
@@ -195,7 +195,7 @@ public class TechTree {
 		// research construction
 		if(!techTree.researchNewTech("Construction"))
 		{
-			System.out.println("Failed to research Masonary");
+			System.out.println("Failed to research Construction");
 			allTestsPass = false;
 		}
 		for(int i = 0; i < 4; i++)
@@ -205,7 +205,7 @@ public class TechTree {
 		
 		if(techTree.isTechUnlocked("Pottery"))
 		{
-			System.out.println("Potter is unlocked!");
+			System.out.println("Harry Potter is unlocked!");
 			allTestsPass = false;
 		}
 		

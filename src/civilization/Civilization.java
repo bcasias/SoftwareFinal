@@ -20,7 +20,12 @@ public class Civilization {
 	}
 	
 	public boolean makeBuilding(Building building) {
-		// TODO Auto-generated method stub
+		if (goldCount >= building.getGoldCost() && stoneCount >= building.getStoneCost() && woodCount >= building.getWoodCost()) {
+			goldCount -= building.getGoldCost();
+			stoneCount -= building.getStoneCost();
+			woodCount -= building.getWoodCost();
+			return true; //if sufficient resources are available, building is possible
+		}
 		return false;
 	}
 

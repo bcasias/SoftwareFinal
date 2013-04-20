@@ -33,23 +33,26 @@ public class GameManager {
 	}
 
 	public void nextTurn() {
+		//TODO gathering logic
 		int foodConsumed = 0;
 		for (City c : playerCiv.getCities()) {
 			foodConsumed += c.getPop(); //each population consumes one food
 		}
-		playerCiv.forceFood(playerCiv.getFoodCount() - foodConsumed);
-		turn++;
-		// TODO Auto-generated method stub
-		
+		playerCiv.forceFood(playerCiv.getFoodCount() - foodConsumed); //remove all eaten food for the turn
+		if (playerCiv.getFoodCount() < 0) playerCiv.forceHappiness(playerCiv.getHappiness() - 1); //if starving, lose one happiness
+		if (playerCiv.getFoodCount() > 0 && playerCiv.getHappiness() < 10) {
+			playerCiv.forceHappiness(playerCiv.getHappiness() + 1); //if well-fed and below 10 happiness, add one happiness
+		}
+		turn++;		
 	}
 
 	public void forceTurn(int i) {
 		turn = i;
-		
 	}
 
 	public boolean gameEnd() {
-		// TODO Auto-generated method stub
+		if (playerCiv.getHappiness() == 0) return true; //lose if happiness reaches 0
+		if (turn == 100) return true; //lose on turn 100 if not winning
 		return false;
 	}
 
