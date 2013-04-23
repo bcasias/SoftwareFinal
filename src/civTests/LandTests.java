@@ -28,31 +28,6 @@ public class LandTests {
 	}
 	
 	@Test
-	public void loadMap()
-	{
-		map = game.getMap();
-		
-		// Checking map size for a 10 rows by 1l columns
-		assertTrue(map.size() == 10); // rows
-		for(int i = 0; i < map.size(); i++)
-		{
-			assertTrue(map.get(i).size() == 11); // check columns
-		}
-		
-		// Check if board pieces are the correct land type
-		assertTrue(map.get(0).get(4).getInitial() == 'm' );
-		assertTrue(map.get(1).get(2).getInitial() == 'd' );
-		assertTrue(map.get(1).get(4).getInitial() == 'p' );
-		assertTrue(map.get(2).get(7).getInitial() == 'h' );
-		assertTrue(map.get(8).get(4).getInitial() == 'f' );
-		assertTrue(map.get(4).get(4).getInitial() == 'o' );
-		
-		//check for rivers
-		assertTrue(map.get(1).get(5).hasRiver());
-		assertFalse(map.get(1).get(1).hasRiver());
-	}
-	
-	@Test
 	public void MapGeneration()
 	{
 		// checking random map generation
@@ -86,22 +61,6 @@ public class LandTests {
 	}
 	
 	@Test
-	public void resourceGeneration()
-	{
-		// Check if a land has resources
-		assertTrue(map.get(1).get(3).hasResource());
-		assertTrue(map.get(1).get(8).hasResource());
-		assertTrue(map.get(4).get(7).hasResource());
-		assertTrue(map.get(8).get(6).hasResource());
-		
-		// e is a food tile (don't ask)
-		assertTrue(map.get(1).get(3).getResourceInitial() == 'e');
-		assertTrue(map.get(1).get(8).getResourceInitial() == 'g');
-		assertTrue(map.get(8).get(6).getResourceInitial() == 's');
-		assertTrue(map.get(4).get(7).getResourceInitial() == 'w');
-	}
-	
-	@Test
 	public void randomResourceGeneration()
 	{
 		int foodCount = 0;
@@ -125,12 +84,5 @@ public class LandTests {
 		assertTrue(goldCount  > 1);
 		assertTrue(stoneCount > 1);
 		assertTrue(woodCount  > 1);
-	}
-	
-	@Test
-	public void buildingConstructed()
-	{
-		Building b = map.get(3).get(7).getBuilding();
-		assertTrue(b instanceof City);
 	}
 }
