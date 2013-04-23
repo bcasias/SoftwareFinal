@@ -9,9 +9,11 @@ public class Civilization {
 	private ArrayList<City> cities;
 	private int goldCount, foodCount, stoneCount, woodCount;
 	private int happiness;
-	
+
 	public Civilization()
 	{
+		cities = new ArrayList<City>();
+		cities.add(new City());
 		goldCount = 100;
 		foodCount = 100;
 		stoneCount = 100;
@@ -89,4 +91,6 @@ public class Civilization {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 }
