@@ -3,35 +3,43 @@ package land;
 import resource.Resource;
 import buildings.Building;
 
-public abstract class Land {
-	private char initial;
+public class Land {
+	public enum LandType {FOREST('F'), HILL('H'), WATER('W'), DESERT('D'), MOUNTAIN('M'), PLAIN('P'), NONE('N');
+		private char type;
+		private LandType(char type) 
+		{
+			this.type = type;
+		}
+		public char getType() {return type;}
+	}
+	LandType landType;
 	private Resource resource;
 	private Building building;
 	private Boolean haveRiver;
 	
-	public Land(char initial)
+	public Land(LandType type)
 	{
-		initialize(initial, false, null);
+		initialize(type, false, null);
 	}
 	
-	public Land(char initial, boolean haveRiver)
+	public Land(LandType type, boolean haveRiver)
 	{
-		initialize(initial, haveRiver, null);
+		initialize(type, haveRiver, null);
 	}
 	
-	public Land(char initial, boolean river, Resource re)
+	public Land(LandType type, boolean river, Resource re)
 	{
-		initialize(initial, river, re);
+		initialize(type, river, re);
 	}
 	
-	private void initialize(char initial, boolean river, Resource re)
+	private void initialize(LandType type, boolean river, Resource re)
 	{
-		this.initial = initial;
+		this.landType = type;
 		this.haveRiver = river;
 		this.resource = re;
 	}
-	public char getInitial() {
-		return initial;
+	public LandType getLandType() {
+		return landType;
 	}
 
 	public boolean hasRiver() {
@@ -63,7 +71,7 @@ public abstract class Land {
 	public String toString()
 	{
 		String rtn = "";
-		rtn += initial;
+		rtn += landType.getType();
 		if(haveRiver)
 			rtn += "r";
 		if(resource != null)

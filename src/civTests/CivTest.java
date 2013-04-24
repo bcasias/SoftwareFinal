@@ -19,7 +19,7 @@ import sticksAndStones.GameManager;
 
 public class CivTest {
 	private GameManager game;
-	private ArrayList<ArrayList< Land>> map;
+	private Land[][] map;
 	private Civilization civ;
 	private City city;
 	

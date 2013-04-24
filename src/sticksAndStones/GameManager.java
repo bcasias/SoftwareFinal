@@ -10,20 +10,21 @@ import land.Land;
 
 
 public class GameManager {
-	private ArrayList<ArrayList<Land> > map;
+	private Land[][] map;
 	private Civilization playerCiv;
 	int turn;
 	
 	public GameManager()
 	{
-		map = new ArrayList<ArrayList<Land> >();
+		MapGeneration g = new MapGeneration();
+		map =  g.generateMap(10, 10);
 		playerCiv = new Civilization();
 		turn = 0;
 	}
 	
 	/* All of these functions are for testing */
 	
-	public ArrayList<ArrayList<Land> > getMap()
+	public Land[][] getMap()
 	{
 		return map;
 	}

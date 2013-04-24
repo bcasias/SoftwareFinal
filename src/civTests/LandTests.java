@@ -17,8 +17,8 @@ import buildings.City;
 import sticksAndStones.GameManager;
 
 public class LandTests {
-	GameManager game;
-	ArrayList<ArrayList< Land>> map;
+	private GameManager game;
+	private Land[][] map;
 	
 	@Before
 	public void setup()
@@ -37,27 +37,27 @@ public class LandTests {
 		int hillCount = 0;
 		int forestCount = 0;
 		int waterCount = 0;
-		for(int i = 0; i < map.size(); i++)
+		for(int i = 0; i < map.length; i++)
 		{
-			for(int j = 0; j < map.get(i).size(); i++)
+			for(int j = 0; j < map[i].length; j++)
 			{
-				switch(map.get(i).get(j).getInitial())
+				switch(map[i][j].getLandType())
 				{
-				case 'm': mountainCount++; 	break;
-				case 'd': desertCount++;	break;
-				case 'p': plainCount++;		break;
-				case 'h': hillCount++; 		break;
-				case 'f': forestCount++; 	break;
-				case 'o': waterCount++; 	break;
+				case MOUNTAIN: 	mountainCount++; 	break;
+				case DESERT: 	desertCount++;		break;
+				case PLAIN: 	plainCount++;		break;
+				case HILL: 		hillCount++; 		break;
+				case FOREST: 	forestCount++; 		break;
+				case WATER: 	waterCount++; 		break;
 				}
 			}
 		}
-		assertTrue(mountainCount> 5);
-		assertTrue(desertCount 	> 5);
-		assertTrue(plainCount 	> 5);
-		assertTrue(hillCount 	> 5);
-		assertTrue(forestCount 	> 5);
-		assertTrue(waterCount 	> 5);
+		assertTrue(mountainCount> 1);
+		assertTrue(desertCount 	> 1);
+		assertTrue(plainCount 	> 1);
+		assertTrue(hillCount 	> 1);
+		assertTrue(forestCount 	> 1);
+		assertTrue(waterCount 	> 1);
 	}
 	
 	@Test
@@ -67,11 +67,11 @@ public class LandTests {
 		int goldCount = 0;
 		int stoneCount = 0;
 		int woodCount = 0;
-		for(int i = 0; i < map.size(); i++)
+		for(int i = 0; i < map.length; i++)
 		{
-			for(int j = 0; j < map.get(i).size(); i++)
+			for(int j = 0; j < map[i].length; j++)
 			{
-				switch(map.get(i).get(j).getResourceInitial())
+				switch(map[i][j].getResourceInitial())
 				{
 				case 'e': foodCount++; 		break;
 				case 'g': goldCount++;		break;
