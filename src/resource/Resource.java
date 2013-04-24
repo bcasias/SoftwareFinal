@@ -1,23 +1,31 @@
 package resource;
 
 public abstract class Resource {
-	private char initial;
-	
-	public Resource(char initial)
+	public enum ResourceType {FOOD('f'), GOLD('g'), STONE('s'), WOOD('w'), NONE('n');
+	private char type;
+	private ResourceType(char type) 
 	{
-		this.initial = initial;
+		this.type = type;
+	}
+		public char getType() {return type;}
+	}
+	private ResourceType resourceType;
+	
+	public Resource(ResourceType resource)
+	{
+		resourceType = resource;
 	}
 	
 	@Override
 	public String toString()
 	{
 		String rtn = "";
-		rtn += initial;
+		rtn += resourceType.getType();
 		return rtn;
 	}
 
-	public char getInitial() {
-		return initial;
+	public ResourceType getResourceType() {
+		return resourceType;
 	}
 	
 }

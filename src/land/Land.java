@@ -1,6 +1,7 @@
 package land;
 
 import resource.Resource;
+import resource.Resource.ResourceType;
 import buildings.Building;
 
 public class Land {
@@ -13,26 +14,26 @@ public class Land {
 		public char getType() {return type;}
 	}
 	LandType landType;
-	private Resource resource;
+	private ResourceType resource;
 	private Building building;
 	private Boolean haveRiver;
 	
 	public Land(LandType type)
 	{
-		initialize(type, false, null);
+		initialize(type, false, ResourceType.NONE);
 	}
 	
 	public Land(LandType type, boolean haveRiver)
 	{
-		initialize(type, haveRiver, null);
+		initialize(type, haveRiver, ResourceType.NONE);
 	}
 	
-	public Land(LandType type, boolean river, Resource re)
+	public Land(LandType landType, boolean river, ResourceType resourceType)
 	{
-		initialize(type, river, re);
+		initialize(landType, river, resourceType);
 	}
 	
-	private void initialize(LandType type, boolean river, Resource re)
+	private void initialize(LandType type, boolean river, ResourceType re)
 	{
 		this.landType = type;
 		this.haveRiver = river;
@@ -51,10 +52,9 @@ public class Land {
 		if (resource != null) return true;
 		return false;
 	}
-	public char getResourceInitial()
+	public ResourceType getResourceType()
 	{
-		if (hasResource()) return resource.getInitial();
-		return 'n';
+		return resource;
 	}
 
 	public Building getBuilding() {
@@ -64,7 +64,14 @@ public class Land {
 
 	public boolean canContainRiver()
 	{
-		return false;
+		switch(landType)
+		{
+		case MOUNTAIN:
+		case WATER:
+			return false;
+		default:
+			return true;
+		}
 	}
 	
 	@Override
@@ -75,7 +82,7 @@ public class Land {
 		if(haveRiver)
 			rtn += "r";
 		if(resource != null)
-			rtn += resource.toString();
+			rtn += resource.getType();
 		return rtn;	
 	}
 }

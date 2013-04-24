@@ -52,8 +52,6 @@ public class LandTests {
 				}
 			}
 		}
-		assertTrue(mountainCount> 1);
-		assertTrue(desertCount 	> 1);
 		assertTrue(plainCount 	> 1);
 		assertTrue(hillCount 	> 1);
 		assertTrue(forestCount 	> 1);
@@ -71,18 +69,18 @@ public class LandTests {
 		{
 			for(int j = 0; j < map[i].length; j++)
 			{
-				switch(map[i][j].getResourceInitial())
+				switch(map[i][j].getResourceType())
 				{
-				case 'e': foodCount++; 		break;
-				case 'g': goldCount++;		break;
-				case 's': stoneCount++;		break;
-				case 'w': woodCount++; 		break;
+				case FOOD: foodCount++; 	break;
+				case GOLD: goldCount++;		break;
+				case STONE: stoneCount++;	break;
+				case WOOD: woodCount++; 	break;
 				}
 			}
 		}
-		assertTrue(foodCount  > 1);
-		assertTrue(goldCount  > 1);
-		assertTrue(stoneCount > 1);
-		assertTrue(woodCount  > 1);
+		assertTrue(foodCount  > 0);
+		assertTrue(goldCount  > 0);
+		assertTrue(stoneCount > 0);
+		assertTrue(woodCount  > 0);
 	}
 }
