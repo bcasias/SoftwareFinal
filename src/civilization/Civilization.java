@@ -1,12 +1,16 @@
 package civilization;
 
 import java.util.ArrayList;
+import java.util.Set;
+
+import land.Land;
 
 import buildings.Building;
 import buildings.City;
 
 public class Civilization {
 	private ArrayList<City> cities;
+	private ArrayList<Land> civLand;
 	private int goldCount, foodCount, stoneCount, woodCount;
 	private int happiness;
 

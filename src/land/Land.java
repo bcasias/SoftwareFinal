@@ -17,24 +17,27 @@ public class Land {
 	private ResourceType resource;
 	private Building building;
 	private Boolean haveRiver;
+	private int locX, locY;
 	
-	public Land(LandType type)
+	public Land(int locx, int locy, LandType type)
 	{
-		initialize(type, false, ResourceType.NONE);
+		initialize(locx, locy, type, false, ResourceType.NONE);
 	}
 	
-	public Land(LandType type, boolean haveRiver)
+	public Land(int locx, int locy, LandType type, boolean haveRiver)
 	{
-		initialize(type, haveRiver, ResourceType.NONE);
+		initialize(locx, locy, type, haveRiver, ResourceType.NONE);
 	}
 	
-	public Land(LandType landType, boolean river, ResourceType resourceType)
+	public Land(int locx, int locy, LandType landType, boolean river, ResourceType resourceType)
 	{
-		initialize(landType, river, resourceType);
+		initialize(locx, locy, landType, river, resourceType);
 	}
 	
-	private void initialize(LandType type, boolean river, ResourceType re)
+	private void initialize(int locx, int locy, LandType type, boolean river, ResourceType re)
 	{
+		this.locX = locx;
+		this.locY = locy;
 		this.landType = type;
 		this.haveRiver = river;
 		this.resource = re;

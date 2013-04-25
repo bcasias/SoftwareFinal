@@ -47,13 +47,13 @@ public class MapGeneration {
 			{
 				int next = rand.nextInt(100);
 				if(next < 31)
-					land[i][j] = new Land(LandType.PLAIN);
+					land[i][j] = new Land(i,j, LandType.PLAIN);
 				else if(next >= 31 && next < 63 )
-					land[i][j] = new Land(LandType.FOREST);
+					land[i][j] = new Land(i,j, LandType.FOREST);
 				else if (next >= 63 && next <=93 )
-					land[i][j] = new Land(LandType.HILL);
+					land[i][j] = new Land(i,j, LandType.HILL);
 				else
-					land[i][j] = new Land(LandType.MOUNTAIN);
+					land[i][j] = new Land(i,j, LandType.MOUNTAIN);
 			}
 		}
 		boolean hasMountain = false;
@@ -146,7 +146,7 @@ public class MapGeneration {
 			for(int j = 0; j < desert[i].length; j++) {
 				if(desert[i][j] != null)
 				{
-					land[locX + i][locY + j] = new Land(LandType.DESERT);
+					land[locX + i][locY + j] = new Land(i,j, LandType.DESERT);
 				}
 			}
 		}
@@ -239,7 +239,7 @@ public class MapGeneration {
 			for(int j = 1; j < water[i].length; j++) {
 				if(water[i][j] != null)
 				{
-					land[locX + i][locY + j] = new Land(LandType.WATER);
+					land[locX + i][locY + j] = new Land(locX + i,locY +j, LandType.WATER);
 				}
 			}
 		}
@@ -304,8 +304,8 @@ public class MapGeneration {
 				if(loc.x + 1 < land.length && !land[loc.x + 1][loc.y].hasRiver() && land[loc.x + 1][loc.y].canContainRiver())
 				{
 					LandType type = land[loc.x + 1][loc.y].getLandType();
-					land[loc.x + 1][loc.y] = new Land(type, true);
 					loc.setLocation(loc.x + 1, loc.y);
+					land[loc.x][loc.y] = new Land(loc.x, loc.y, type, true);
 					riverLength--;
 					land = makeLandWithRiver(loc.x, loc.y, land);
 				}
@@ -314,9 +314,8 @@ public class MapGeneration {
 				if(loc.x - 1> 0 && (!land[loc.x - 1][loc.y].hasRiver() && land[loc.x - 1][loc.y].canContainRiver()))
 				{
 					LandType type = land[loc.x - 1][loc.y].getLandType();
-					land[loc.x - 1][loc.y] = new Land(type, true);
-					if(loc.x != 0)
 					loc.setLocation(loc.x - 1, loc.y);
+					land[loc.x][loc.y] = new Land(loc.x, loc.y, type, true);
 					riverLength--;
 					land = makeLandWithRiver(loc.x, loc.y, land);
 				}
@@ -325,9 +324,8 @@ public class MapGeneration {
 				if(loc.y  + 1< land[0].length && !land[loc.x][loc.y + 1].hasRiver() && land[loc.x][loc.y+1].canContainRiver())
 				{
 					LandType type = land[loc.x ][loc.y + 1].getLandType();
-					land[loc.x][loc.y + 1] = new Land(type, true);
-					
 					loc.setLocation(loc.x, loc.y + 1);
+					land[loc.x][loc.y] = new Land(loc.x, loc.y, type, true);
 					riverLength--;
 					land = makeLandWithRiver(loc.x, loc.y, land);
 				}
@@ -336,9 +334,8 @@ public class MapGeneration {
 				if(loc.y > 0 && !land[loc.x][loc.y-1].hasRiver() && land[loc.x][loc.y-1].canContainRiver())
 				{
 					LandType type = land[loc.x ][loc.y - 1].getLandType();
-					land[loc.x][loc.y - 1] = new Land(type, true);
-					if(loc.y != 0)
 					loc.setLocation(loc.x, loc.y -1);
+					land[loc.x][loc.y] = new Land(loc.x, loc.y, type, true);
 					riverLength--;
 					land = makeLandWithRiver(loc.x, loc.y, land);
 				}
@@ -353,20 +350,20 @@ public class MapGeneration {
 	private Land[][] makeLandWithRiver(int locX, int locY, Land[][] land) {
 		if(land[locX][locY].getLandType() == LandType.PLAIN)
 		{
-			land[locX][locY] = new Land(LandType.PLAIN, true);
+			land[locX][locY] = new Land(locX, locY, LandType.PLAIN, true);
 			
 		}
 		else if(land[locX][locY].getLandType() == LandType.DESERT)
 		{
-			land[locX][locY] = new Land(LandType.DESERT, true);
+			land[locX][locY] = new Land(locX, locY, LandType.DESERT, true);
 		}
 		else if(land[locX][locY].getLandType() == LandType.HILL)
 		{
-			land[locX][locY] = new Land(LandType.HILL, true);
+			land[locX][locY] = new Land(locX, locY, LandType.HILL, true);
 		}
 		else if(land[locX][locY].getLandType() == LandType.FOREST)
 		{
-			land[locX][locY] = new Land(LandType.FOREST, true);
+			land[locX][locY] = new Land(locX, locY, LandType.FOREST, true);
 		}
 		return land;
 	}
@@ -388,20 +385,20 @@ public class MapGeneration {
 				if(land[i][j].getLandType() == LandType.PLAIN && haveResource)
 				{
 					haveRiver = land[i][j].hasRiver();
-					land[i][j] = new Land(LandType.PLAIN,haveRiver, ResourceType.FOOD);
+					land[i][j] = new Land(i,j,LandType.PLAIN,haveRiver, ResourceType.FOOD);
 				}
 				else if(land[i][j].getLandType() == LandType.HILL && haveResource)
 				{
 					haveRiver = land[i][j].hasRiver();
 					if(haveStone)
-						land[i][j] = new Land(LandType.HILL,haveRiver, ResourceType.STONE);
+						land[i][j] = new Land(i,j,LandType.HILL,haveRiver, ResourceType.STONE);
 					else 
-						land[i][j] = new Land(LandType.HILL,haveRiver, ResourceType.GOLD);
+						land[i][j] = new Land(i,j,LandType.HILL,haveRiver, ResourceType.GOLD);
 				}
 				else if(land[i][j].getLandType() == LandType.FOREST && haveResource)
 				{
 					haveRiver = land[i][j].hasRiver();
-					land[i][j] = new Land(LandType.FOREST,haveRiver, ResourceType.WOOD);
+					land[i][j] = new Land(i,j,LandType.FOREST,haveRiver, ResourceType.WOOD);
 				}
 			}
 		}
