@@ -23,6 +23,7 @@ public class Civilization {
 	{
 		cities = new ArrayList<City>();
 		cities.add(new City());
+		civLand = new ArrayList<Land>();
 		goldCount = 100;
 		foodCount = 100;
 		stoneCount = 100;
@@ -42,6 +43,7 @@ public class Civilization {
 
 	public void gatherResources()
 	{
+		if(civLand.size() > 0);
 		for(Land l : civLand)
 		{
 			switch(l.getLandType())
@@ -138,6 +140,10 @@ public int getNumberofTechs() {
 public void researchNewTech(String string) {
 	// TODO Auto-generated method stub
 
+}
+
+public ArrayList<Land> getLand() {
+	return civLand;
 }
 
 

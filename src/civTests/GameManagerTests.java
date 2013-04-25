@@ -54,7 +54,9 @@ public class GameManagerTests {
 	@Test
 	public void landCountWin()
 	{
-		game.forcePlayerLand(24);
+		for(int i = 0; i < 10; i++)
+			for(int j = 0; j < 2; j++)
+				civ.getCities().get(0).addLand(i,j);
 		assertFalse(game.gameEnd());
 		game.claimLand();
 		game.nextTurn();

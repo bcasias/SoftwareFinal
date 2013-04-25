@@ -88,4 +88,9 @@ public class Land {
 			rtn += resource.getType();
 		return rtn;	
 	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
+		
+	}
 }

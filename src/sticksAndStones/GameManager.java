@@ -2,6 +2,7 @@ package sticksAndStones;
 
 import java.util.ArrayList;
 
+import buildings.Building;
 import buildings.City;
 
 import civilization.Civilization;
@@ -45,6 +46,15 @@ public class GameManager {
 			playerCiv.forceHappiness(playerCiv.getHappiness() + 1); //if well-fed and below 10 happiness, add one happiness
 		}
 		turn++;		
+	}
+	public void buildBuilding(int locX, int locY, Building building)
+	{
+		Land l = map[locX][locY];
+		if(l.getBuilding() != null)
+			if(playerCiv.getLand().contains(l)) {
+				playerCiv.makeBuilding(building);
+				l.setBuilding(building);
+			}
 	}
 
 	public void forceTurn(int i) {
