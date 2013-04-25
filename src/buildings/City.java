@@ -18,10 +18,16 @@ public class City extends Building {
 		pop = 1;
 		locationX = x;
 		locationY = y;
+		landOwned.add(0);
 	}
 
 	public void forcePopulation(int i) {
 		pop = i;
+	}
+	
+	public int getNumberOfLand()
+	{
+		return landOwned.size();
 	}
 
 	public CityType getCityType() {

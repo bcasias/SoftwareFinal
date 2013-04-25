@@ -146,5 +146,13 @@ public ArrayList<Land> getLand() {
 	return civLand;
 }
 
-
+public int getLandcount()
+{
+		int total = 0;
+		for(City c: cities)
+		{
+			total += c.getNumberOfLand();
+		}
+		return total;
+}
 }

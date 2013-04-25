@@ -57,8 +57,11 @@ public class GameManagerTests {
 		for(int i = 0; i < 10; i++)
 			for(int j = 0; j < 2; j++)
 				civ.getCities().get(0).addLand(i,j);
+		for (int i = 0; i < 4; i++)
+			civ.getCities().get(0).addLand(i, 2);
+		System.out.println(civ.getLandcount());
 		assertFalse(game.gameEnd());
-		game.claimLand();
+		civ.getCities().get(0).addLand(4, 2);
 		game.nextTurn();
 		assertTrue(game.gameEnd());
 	}

@@ -80,6 +80,7 @@ public class GameManager {
 	public boolean gameEnd() {
 		if (playerCiv.getHappiness() == 0) return true; //lose if happiness reaches 0
 		if (turn == 100) return true; //lose on turn 100 if not winning
+		if (playerCiv.getLandcount() > 24) return true;
 		if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125)
 			return true;
 		return false;
