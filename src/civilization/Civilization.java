@@ -1,11 +1,13 @@
 package civilization;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Set;
 
 import resource.Resource.ResourceType;
 
 import land.Land;
+import land.Land.LandType;
 
 import buildings.Building;
 import buildings.City;
@@ -101,6 +103,10 @@ public int getFoodCount() {
 public ArrayList<City> getCities()
 {
 	return cities;
+}
+
+public void setCivLand(ArrayList<Land> civLand) {
+	this.civLand = civLand;
 }
 
 public void forceFood(int i) {

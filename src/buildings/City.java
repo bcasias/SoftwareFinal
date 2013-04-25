@@ -24,7 +24,7 @@ public class City extends Building {
 	public void forcePopulation(int i) {
 		pop = i;
 	}
-	
+
 	public int getNumberOfLand()
 	{
 		return landOwned.size();
@@ -38,13 +38,14 @@ public class City extends Building {
 		else
 			return CityType.VILLAGE;
 	}
-	
+
 	public void placeCity(int x, int y) {
 		locationX = x;
 		locationY = y;
 	}
-	
+
 	public boolean addLand(int x, int y) {
+		System.out.println(landOwned);
 		int location = sticksAndStones.GameManager.calculateIndex(x, y);
 		for (int land : landOwned) {
 			if (land == location) {
@@ -64,6 +65,26 @@ public class City extends Building {
 			}
 		}
 		return false;
+	}
+
+	public boolean addLand2(int x, int y) {
+		int loc = sticksAndStones.GameManager.calculateIndex(x, y);
+		boolean adjacent = false;
+		for (int i : landOwned) {
+			if (loc == i) return false; //do not add if already within city borders
+			if (loc == i + 1 || loc == i - 1 || loc == i + sticksAndStones.GameManager.getBoardSizeY() ||
+					loc == i - sticksAndStones.GameManager.getBoardSizeY()) { //recognize adjacency of a square
+				adjacent = true;
+				break;
+			}
+		}
+		if (adjacent == false) return false; 
+		landOwned.add(loc);
+		return true;
+	}
+
+	public ArrayList<Integer> getLandOwned() {
+		return landOwned;
 	}
 
 	public int getPop() {

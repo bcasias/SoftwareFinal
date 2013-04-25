@@ -55,13 +55,14 @@ public class GameManagerTests {
 	public void landCountWin()
 	{
 		for(int i = 0; i < 10; i++)
-			for(int j = 0; j < 2; j++)
-				civ.getCities().get(0).addLand(i,j);
+			for(int j = 0; j < 2; j++) {
+				civ.getCities().get(0).addLand2(i,j);
+			}
 		for (int i = 0; i < 4; i++)
-			civ.getCities().get(0).addLand(i, 2);
-		System.out.println(civ.getLandcount());
+			civ.getCities().get(0).addLand2(i, 2);
+		game.updateLand();
 		assertFalse(game.gameEnd());
-		civ.getCities().get(0).addLand(4, 2);
+		civ.getCities().get(0).addLand2(4, 2);
 		game.nextTurn();
 		assertTrue(game.gameEnd());
 	}

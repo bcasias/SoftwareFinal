@@ -82,15 +82,9 @@ public class CivTest {
 	@Test
 	public void resourceTest()
 	{
-		// For test 
-		// city will be at location 3, 7
-		// land will be from 2,6 to 4,8
-		
-		// resources
-		// 2 foods
-		// 4 woods
-		// 4 stone (1+ for city on top of resource)
-		// 1 gold (from city)
+		for(int i = 0; i < 10; i++)
+			for(int j = 0; j < 2; j++)
+				civ.getCities().get(0).addLand2(i,j);
 		
 		// 1 food for each population
 		// start with a population of 1

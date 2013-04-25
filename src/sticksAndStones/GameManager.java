@@ -1,5 +1,6 @@
 package sticksAndStones;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import buildings.Building;
@@ -31,6 +32,12 @@ public class GameManager {
 		return x * boardSizeY + y; 
 	}
 	
+	public static Point calcReverseIndex(int index) {
+		int x = index / boardSizeY;
+		int y = index % boardSizeY;
+		return new Point(x, y);
+	}
+	
 	public static int getBoardSizeX() {
 		return boardSizeX;		
 	}
@@ -45,12 +52,28 @@ public class GameManager {
 	{
 		return map;
 	}
+	
+	public Land getSquare(int index) {
+		Point p = sticksAndStones.GameManager.calcReverseIndex(index);
+		return map[p.x][p.y];
+	}
 
 	public Civilization getPlayerCiv() {
 		return playerCiv;
 	}
+	
+	public void updateLand() {
+		ArrayList<Land> lands = new ArrayList<Land>();
+		for (City c : playerCiv.getCities()) {
+			for (int i : c.getLandOwned()) {
+				lands.add(getSquare(i));
+			}
+		}
+		playerCiv.setCivLand(lands);
+	}
 
 	public void nextTurn() {
+		updateLand();
 		playerCiv.gatherResources();
 		int foodConsumed = 0;
 		for (City c : playerCiv.getCities()) {
@@ -80,7 +103,7 @@ public class GameManager {
 	public boolean gameEnd() {
 		if (playerCiv.getHappiness() == 0) return true; //lose if happiness reaches 0
 		if (turn == 100) return true; //lose on turn 100 if not winning
-		if (playerCiv.getLandcount() > 24) return true;
+		if (playerCiv.getLand().size() > 24) return true;
 		if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125)
 			return true;
 		return false;

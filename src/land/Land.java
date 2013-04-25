@@ -93,4 +93,20 @@ public class Land {
 		this.building = building;
 		
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Land other = (Land) obj;
+		if (locX != other.locX)
+			return false;
+		if (locY != other.locY)
+			return false;
+		return true;
+	}
 }
