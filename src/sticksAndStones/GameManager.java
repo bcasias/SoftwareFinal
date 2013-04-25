@@ -34,7 +34,7 @@ public class GameManager {
 	}
 
 	public void nextTurn() {
-		//TODO gathering logic
+		playerCiv.gatherResources();
 		int foodConsumed = 0;
 		for (City c : playerCiv.getCities()) {
 			foodConsumed += c.getPop(); //each population consumes one food
