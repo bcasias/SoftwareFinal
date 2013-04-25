@@ -22,7 +22,7 @@ public class Civilization {
 	public Civilization()
 	{
 		cities = new ArrayList<City>();
-		cities.add(new City());
+		cities.add(new City(0,0));
 		civLand = new ArrayList<Land>();
 		goldCount = 100;
 		foodCount = 100;

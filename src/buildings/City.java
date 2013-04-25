@@ -12,10 +12,12 @@ public class City extends Building {
 
 	private int pop;
 
-	public City() {
+	public City(int x, int y) {
 		super(5, 5, 5);
 		landOwned = new ArrayList<Integer>();
 		pop = 1;
+		locationX = x;
+		locationY = y;
 	}
 
 	public void forcePopulation(int i) {

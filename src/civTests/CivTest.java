@@ -38,7 +38,7 @@ public class CivTest {
 		// makes sure resources are subtracted correctly
 		// city will start with 100 of every resource
 		// city needs 5 gold, wood, and stone
-		assertTrue(civ.makeBuilding(new City()));
+		assertTrue(civ.makeBuilding(new City(1,1)));
 		// Checks resourceCount
 		assertEquals(95, civ.getGoldCount());
 		assertEquals(95, civ.getWoodCount());
