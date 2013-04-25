@@ -13,16 +13,32 @@ import land.Land;
 public class GameManager {
 	private Land[][] map;
 	private Civilization playerCiv;
-	int turn;
+	private int turn;
+	private static int boardSizeX;
+	private static int boardSizeY;
 	
 	public GameManager()
 	{
 		MapGeneration g = new MapGeneration();
 		map =  g.generateMap(10, 10);
+		boardSizeX = 10;
+		boardSizeY = 10;
 		playerCiv = new Civilization();
 		turn = 0;
 	}
 	
+	public static int calculateIndex(int x, int y) {
+		return x * boardSizeY + y; 
+	}
+	
+	public static int getBoardSizeX() {
+		return boardSizeX;		
+	}
+	
+	public static int getBoardSizeY() {
+		return boardSizeY;
+	}
+		
 	/* All of these functions are for testing */
 	
 	public Land[][] getMap()
