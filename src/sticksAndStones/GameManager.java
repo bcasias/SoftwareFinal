@@ -2,13 +2,16 @@ package sticksAndStones;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import buildings.Building;
 import buildings.City;
 
 import civilization.Civilization;
+import civilization.Unit;
 
 import land.Land;
+import land.Land.LandType;
 
 
 public class GameManager {
@@ -17,6 +20,7 @@ public class GameManager {
 	private int turn;
 	private static int boardSizeX;
 	private static int boardSizeY;
+	private Unit monster;
 	
 	public GameManager()
 	{
@@ -24,8 +28,22 @@ public class GameManager {
 		map =  g.generateMap(10, 10);
 		boardSizeX = 10;
 		boardSizeY = 10;
-		playerCiv = new Civilization();
+		boolean foundPlaceForCity = false;
+		int randX, randY;
+		Random rand = new Random();
+		// place city
+		while(!foundPlaceForCity)
+		{
+			randX = rand.nextInt(boardSizeX);
+			randY = rand.nextInt(boardSizeY);
+			if(map[randX][randY].getLandType() != LandType.WATER && map[randX][randY].getLandType() != LandType.MOUNTAIN )
+			{
+				foundPlaceForCity = true;
+				playerCiv = new Civilization(map, randX, randY);
+			}
+		}
 		turn = 0;
+		// TODO add in monster
 	}
 	
 	public static int calculateIndex(int x, int y) {
@@ -62,38 +80,15 @@ public class GameManager {
 		return playerCiv;
 	}
 	
-	public void updateLand() {
-		ArrayList<Land> lands = new ArrayList<Land>();
-		for (City c : playerCiv.getCities()) {
-			for (int i : c.getLandOwned()) {
-				lands.add(getSquare(i));
-			}
-		}
-		playerCiv.setCivLand(lands);
-	}
-
 	public void nextTurn() {
-		updateLand();
-		playerCiv.gatherResources();
-		int foodConsumed = 0;
-		for (City c : playerCiv.getCities()) {
-			foodConsumed += c.getPop(); //each population consumes one food
-		}
-		playerCiv.forceFood(playerCiv.getFoodCount() - foodConsumed); //remove all eaten food for the turn
-		if (playerCiv.getFoodCount() < 0) playerCiv.forceHappiness(playerCiv.getHappiness() - 1); //if starving, lose one happiness
-		if (playerCiv.getFoodCount() > 0 && playerCiv.getHappiness() < 10) {
-			playerCiv.forceHappiness(playerCiv.getHappiness() + 1); //if well-fed and below 10 happiness, add one happiness
-		}
+		playerCiv.update();
+		gameEnd(); // TODO Logic???
 		turn++;		
 	}
+	
 	public void buildBuilding(int locX, int locY, Building building)
 	{
-		Land l = map[locX][locY];
-		if(l.getBuilding() != null)
-			if(playerCiv.getLand().contains(l)) {
-				playerCiv.makeBuilding(building);
-				l.setBuilding(building);
-			}
+		playerCiv.makeBuilding(locX, locY, building);
 	}
 
 	public void forceTurn(int i) {
@@ -109,14 +104,39 @@ public class GameManager {
 		return false;
 	}
 
-	public void forcePlayerLand(int i) {
-		// TODO Auto-generated method stub
+	public String[][] gameArchitect()
+	// creates a list of what to draw in each cell
+	// format "<landType>,<City>, <Unit> "
+	{
+		String[][] architect = new String[boardSizeX][boardSizeY];
 		
-	}
-
-	public void claimLand() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < boardSizeX; i++)
+		{
+			for(int j = 0; j < boardSizeY; j++)
+			{
+				// Add land Type
+				String value = "";
+				value += map[i][j].getLandType().getType();
+				if (map[i][j].hasRiver()) value += 'r';
+				value += ",";
+				// Add cities
+				if(playerCiv.hasCityAt(new Point(i,j)))
+				{
+					value += playerCiv.getCityAt(new Point(i,j)).getCityType().getType();
+				}// end if
+				else
+				{
+					value += ",";
+				}// end else
+				// Add units
+				if(playerCiv.hasUnitAt(new Point(i,j)))
+				{
+					value += playerCiv.getUnitAt(new Point(i,j)).getUnitType().getType();
+					value += playerCiv.getUnitAt(new Point(i,j)).getHealth();
+				}// end if
+			} // end for j
+		}// end for i
 		
+		return architect;
 	}
-
 }

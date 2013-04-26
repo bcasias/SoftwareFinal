@@ -15,7 +15,6 @@ public class Land {
 	}
 	LandType landType;
 	private ResourceType resource;
-	private Building building;
 	private Boolean haveRiver;
 	private int locX, locY;
 	
@@ -60,10 +59,6 @@ public class Land {
 		return resource;
 	}
 
-	public Building getBuilding() {
-		if (building != null) return building;
-		return null;
-	}
 
 	public boolean canContainRiver()
 	{
@@ -89,10 +84,6 @@ public class Land {
 		return rtn;	
 	}
 
-	public void setBuilding(Building building) {
-		this.building = building;
-		
-	}
 
 	@Override
 	public boolean equals(Object obj) {
