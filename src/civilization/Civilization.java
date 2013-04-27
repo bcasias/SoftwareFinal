@@ -268,4 +268,9 @@ public class Civilization {
 		return null;
 	}
 
+	public void removeUnit(Unit defender) {
+		units.remove(defender);
+		
+	}
+
 }

@@ -3,8 +3,10 @@ package civilization;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import sticksAndStones.Direction;
+import sticksAndStones.MovementManager;
+
 public class Unit {
-	public enum MoveDirection{NORTH, EAST, SOUTH, WEST}
 	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMOND('D');
 		private char type;
 		private UnitType(char type)
@@ -56,12 +58,28 @@ public class Unit {
 		return health;
 	}
 	
-	public void move(MoveDirection direction, ArrayList<Unit> units, Unit monster)
+	public void move(Direction direction)
 	{
-		// TODO
+		Point possible = MovementManager.canMoveTo(this, direction); 
+		if(possible != null)
+			position = possible;
+		return;
+	}
+	public int getStrength()
+	{
+		return strength;
 	}
 	public void takeDamage(int damage)
 	{
 		health -= damage;
+	}
+
+	public Point getLocation() {
+		return position;
+	}
+
+	public void setLocation(Point location) {
+		position = location;
+		
 	}
 }
