@@ -1,24 +1,36 @@
 package sticksAndStones;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+
 import land.Land;
 
-public class SticksandStone {
-
-	/**
-	 * @param args
-	 */
+public class SticksandStone extends JFrame {
+	private GameManager gameManager;
+	private ControlGUI controlGUI;
+	private StatusBar statusBar;
+	
+	public SticksandStone()
+	{
+		gameManager = new GameManager();
+		controlGUI = new ControlGUI();
+		statusBar = new StatusBar(gameManager.getPlayerCiv());
+		this.setLayout(new BorderLayout());
+		this.add(gameManager, BorderLayout.CENTER);
+		this.add(controlGUI, BorderLayout.SOUTH);
+		this.add(statusBar, BorderLayout.EAST);
+		Toolkit tk = Toolkit.getDefaultToolkit();  
+		int xSize = ((int) tk.getScreenSize().getWidth());  
+		int ySize = ((int) tk.getScreenSize().getHeight());
+		this.setSize(new Dimension(xSize,ySize));
+		this.setVisible(true);
+	}
+	
 	public static void main(String[] args) {
-		MapGeneration m = new  MapGeneration();
-		Land[][] l = m.generateMap(15,15);
-		
-		for(int i = 0; i < l.length; i++)
-		{
-			for(int j = 0; j < l[i].length; j++)
-			{
-				System.out.print(l[i][j].toString() + "\t");
-			}
-			System.out.println();
-		}
+		SticksandStone game = new SticksandStone();
 	}
 
 }

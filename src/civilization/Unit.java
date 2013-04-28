@@ -8,7 +8,7 @@ import sticksAndStones.GameManager;
 import sticksAndStones.MovementManager;
 
 public class Unit {
-	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMOND('D');
+	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
 		private char type;
 		private UnitType(char type)
 		{
@@ -40,7 +40,7 @@ public class Unit {
 		case SOLDIER: strength = 3; health = 10; break;
 		case KNIGHT:  strength = 5; health = 15; break;
 		case WARRIOR: strength = 7; health = 20; break;
-		case DEMOND:  strength = 9; health = 40; break;
+		case DEMON:  strength = 9; health = 40; break;
 		default: unitType = UnitType.SOLDIER; setAttributes();break;
 		}
 	}
