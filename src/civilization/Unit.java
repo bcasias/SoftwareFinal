@@ -112,4 +112,9 @@ public class Unit {
 	public int getMovementPoints() {
 		return moveCount;
 	}
+	
+	public BufferedImage getImage()
+	{
+		return image;
+	}
 }
