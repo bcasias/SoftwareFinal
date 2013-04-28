@@ -32,4 +32,9 @@ public abstract class Building {
 	public int getStoneCost() {
 		return stoneCost;
 	}
+	
+	public BufferedImage getImage()
+	{
+		return image;
+	}
 }
