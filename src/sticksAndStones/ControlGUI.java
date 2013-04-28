@@ -9,14 +9,16 @@ import javax.swing.JPanel;
 public class ControlGUI extends JPanel{
 	private BuildingPanel buildingPanel;
 	private MovePanel movePanel;
-	
+	private JButton nextTurn;
 	public ControlGUI()
 	{
+		nextTurn = new JButton("Next Turn");
 		buildingPanel = new BuildingPanel();
 		movePanel = new MovePanel();
 		this.setLayout(new BorderLayout());
 		this.add(buildingPanel, BorderLayout.CENTER);
 		this.add(movePanel, BorderLayout.EAST);
+		this.add(nextTurn, BorderLayout.WEST);
 		this.setVisible(true);
 	}
 	

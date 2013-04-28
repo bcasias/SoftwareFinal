@@ -2,6 +2,7 @@ package sticksAndStones;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -21,7 +22,10 @@ public class SticksandStone extends JFrame {
 		this.add(gameManager, BorderLayout.CENTER);
 		this.add(controlGUI, BorderLayout.SOUTH);
 		this.add(statusBar, BorderLayout.EAST);
-		this.setSize(new Dimension(600,500));
+		Toolkit tk = Toolkit.getDefaultToolkit();  
+		int xSize = ((int) tk.getScreenSize().getWidth());  
+		int ySize = ((int) tk.getScreenSize().getHeight());
+		this.setSize(new Dimension(xSize,ySize));
 		this.setVisible(true);
 	}
 	
