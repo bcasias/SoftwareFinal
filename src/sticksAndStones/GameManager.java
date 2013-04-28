@@ -1,6 +1,10 @@
 package sticksAndStones;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,6 +12,7 @@ import javax.swing.JPanel;
 
 import buildings.Building;
 import buildings.City;
+import buildings.ImprovementBuilding;
 
 import civilization.Civilization;
 import civilization.Unit;
@@ -45,7 +50,15 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			}
 		}
 		turn = 0;
+		this.addComponentListener(new resizeListener());
+		this.repaint();
 		// TODO add in monster
+	}
+	
+	public class resizeListener extends ComponentAdapter {
+		public void componentResized(ComponentEvent e) {
+			//draw();
+		}
 	}
 	
 	public static int calculateIndex(int x, int y) {
@@ -147,18 +160,20 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return architect;
 	}
 	
-	public void draw() {
+	@Override
+	protected void paintComponent(Graphics g) {
 		int locX = 0, locY = 0;
-		double incWidth = getWidth()/boardSizeY;
-		double incHeight = getHeight()/boardSizeX;
-		System.out.println(getWidth());
-		System.out.println(getHeight());
+		int incWidth = getWidth()/boardSizeY;
+		int incHeight = getHeight()/boardSizeX;
 		for(int i = 0; i < boardSizeX; i++) {
 			for(int j = 0; j < boardSizeY; j++) {
-				
+				map[i][j].draw(g, incWidth, incHeight, locX, locY);
 				locY += incWidth;
 			}
 			locX += incHeight;
+		}
+		for (ImprovementBuilding b : playerCiv.getBuildings()) {
+			b.draw(g, incWidth, incHeight, (int) b.getLocation().getX() * incHeight, (int) b.getLocation().getY() * incWidth);
 		}
 	}
 }

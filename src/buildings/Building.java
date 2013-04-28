@@ -1,5 +1,6 @@
 package buildings;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
@@ -36,5 +37,9 @@ public abstract class Building {
 	public BufferedImage getImage()
 	{
 		return image;
+	}
+	
+	public void draw(Graphics g, int sizeX, int sizeY, int locX, int locY) {
+		g.drawImage(image, sizeX, sizeY, locX, locY, null);
 	}
 }

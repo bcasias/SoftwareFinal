@@ -130,4 +130,8 @@ public class Land {
 			return false;
 		return true;
 	}
+	
+	public void draw(Graphics g, int sizeX, int sizeY, int locX, int locY) {
+		g.drawImage(image, sizeX, sizeY, locX, locY, null);
+	}
 }

@@ -206,6 +206,10 @@ public class Civilization {
 		return happiness;
 	}
 	
+	public ArrayList<ImprovementBuilding> getBuildings() {
+		return buildings;
+	}
+
 	public void forceHappiness(int i) {
 		happiness = i;
 	
