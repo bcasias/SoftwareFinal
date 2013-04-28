@@ -273,4 +273,8 @@ public class Civilization {
 		
 	}
 
+	public ArrayList<Unit> getUnits() {
+		return units;
+	}
+
 }

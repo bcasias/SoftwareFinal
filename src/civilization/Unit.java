@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import sticksAndStones.Direction;
+import sticksAndStones.GameManager;
 import sticksAndStones.MovementManager;
 
 public class Unit {
@@ -60,9 +61,22 @@ public class Unit {
 	
 	public void move(Direction direction)
 	{
-		Point possible = MovementManager.canMoveTo(this, direction); 
-		if(possible != null)
-			position = possible;
+		Point newPoint = MovementManager.moveTo(this, direction); 
+		if(newPoint.equals(position))
+			return;
+		position = newPoint;
+		
+		switch(GameManager.getLandAt(position).getLandType())
+		{
+		case PLAIN:
+		case DESERT:
+			moveCount--;
+			break;
+		case FOREST:
+		case HILL:
+			moveCount -= 2;
+			break;
+		} 
 		return;
 	}
 	public int getStrength()
@@ -78,8 +92,12 @@ public class Unit {
 		return position;
 	}
 
-	public void setLocation(Point location) {
-		position = location;
-		
+	public void attack()
+	{
+		moveCount = 0;
+	}
+
+	public int getMovementPoints() {
+		return moveCount;
 	}
 }

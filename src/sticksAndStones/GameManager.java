@@ -15,7 +15,7 @@ import land.Land.LandType;
 
 
 public class GameManager {
-	private Land[][] map;
+	private static Land[][] map;
 	private Civilization playerCiv;
 	private int turn;
 	private static int boardSizeX;
@@ -103,8 +103,13 @@ public class GameManager {
 			return true;
 		return false;
 	}
+	
+	public static Land getLandAt(Point point)
+	{
+		return map[point.x][point.y];
+	}
 
-	public String[][] gameArchitect()
+	public String[][] drawOUtline()
 	// creates a list of what to draw in each cell
 	// format "<landType>,<City>, <Unit> "
 	{
@@ -139,4 +144,5 @@ public class GameManager {
 		
 		return architect;
 	}
+	
 }
