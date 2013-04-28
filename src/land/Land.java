@@ -1,5 +1,11 @@
 package land;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import resource.Resource;
 import resource.Resource.ResourceType;
 import buildings.Building;
@@ -13,6 +19,7 @@ public class Land {
 		}
 		public char getType() {return type;}
 	}
+	private BufferedImage image;
 	LandType landType;
 	private ResourceType resource;
 	private Boolean haveRiver;
@@ -40,6 +47,22 @@ public class Land {
 		this.landType = type;
 		this.haveRiver = river;
 		this.resource = re;
+		
+		
+		 try 
+		 {
+			 switch(landType)
+				{
+					case WATER: 	image = ImageIO.read(new File("Textures/Land/Water")); break;
+					case DESERT:	image = ImageIO.read(new File("Textures/Land/Desert")); break;
+					case HILL:		image = ImageIO.read(new File("Textures/Land/HILL")); break;
+					case FOREST:	image = ImageIO.read(new File("Textures/Land/Forest")); break;
+					case PLAIN:		image = ImageIO.read(new File("Textures/Land/PLain")); break;
+					case MOUNTAIN:	image = ImageIO.read(new File("Textures/Land/Water")); break;
+				}// end switch
+	     } catch (IOException ex) {
+	            // handle exception...
+	     }
 	}
 	public LandType getLandType() {
 		return landType;

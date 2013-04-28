@@ -29,6 +29,7 @@ public class StatusBar extends JPanel {
 									humanCiv.getHappiness());
 		this.cityPanel = new CityPanel(humanCiv.getCities());
 		this.unitPanel = new UnitPanel(humanCiv.getUnits());
+		this.SetupGUI();
 	}
 	
 	private void SetName(String name)
@@ -47,6 +48,7 @@ public class StatusBar extends JPanel {
 		 */
 		this.setLayout(new GridLayout(0,1));
 		this.setBorder(new TitledBorder("Civilization Manager"));
+		this.setVisible(true);
 	}
 	
 	class Status extends JPanel
@@ -98,8 +100,8 @@ public class StatusBar extends JPanel {
 			this.add(woodt);
 			this.add(stonel);
 			this.add(stonet);
-			this.setVisible(true);
 			this.setBorder(new TitledBorder("Status: "));
+			this.setVisible(true);
 		}
 		
 		public void update(int stone, int wood, int gold, int food, int happiness)
@@ -133,8 +135,8 @@ public class StatusBar extends JPanel {
 				field.setEditable(false);
 				this.add(field);
 			}// end for
-			this.setVisible(true);
 			this.setBorder(new TitledBorder("Cities:"));
+			this.setVisible(true);
 		}
 	}
 
@@ -159,8 +161,8 @@ public class StatusBar extends JPanel {
 				field.setEditable(false);
 				this.add(field);
 			}// end for
-			this.setVisible(true);
 			this.setBorder(new TitledBorder("Units:"));
+			this.setVisible(true);
 		}
 	}
 }

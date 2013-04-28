@@ -16,7 +16,7 @@ public class ControlGUI extends JPanel{
 		movePanel = new MovePanel();
 		this.setLayout(new BorderLayout());
 		this.add(buildingPanel, BorderLayout.CENTER);
-		this.add(movePanel, BorderLayout.WEST);
+		this.add(movePanel, BorderLayout.EAST);
 		this.setVisible(true);
 	}
 	
