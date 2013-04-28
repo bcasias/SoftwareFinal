@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-
-import land.Land;
+import sticksAndStones.GameManager;
+import sticksAndStones.ControlGUI;
 
 public class SticksandStone extends JFrame {
 	private GameManager gameManager;
@@ -27,9 +27,4 @@ public class SticksandStone extends JFrame {
 		this.setVisible(true);
 		gameManager.draw();
 	}
-	
-	public static void main(String[] args) {
-		SticksandStone game = new SticksandStone();
-	}
-
 }
