@@ -1,7 +1,11 @@
 package buildings;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class City extends Building {
 	public enum CityType {
@@ -29,6 +33,12 @@ public class City extends Building {
 		pop = 1;
 		location = new Point(x,y);
 		landOwned.add(0);
+		try {
+			image = ImageIO.read(new File("Textures/Building/Village"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void update()
@@ -46,9 +56,23 @@ public class City extends Building {
 		if(pop >= 5 && pop < 10)
 		{
 			cityType = CityType.TOWN;
+			try {
+				image = ImageIO.read(new File("Textures/Building/Town"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if (pop >= 10)
+		{
 			cityType = CityType.CITY;
+			try {
+				image = ImageIO.read(new File("Textures/Building/Town"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public CityType getCityType() {
