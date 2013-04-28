@@ -147,4 +147,18 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return architect;
 	}
 	
+	public void draw() {
+		int locX = 0, locY = 0;
+		double incWidth = getWidth()/boardSizeY;
+		double incHeight = getHeight()/boardSizeX;
+		System.out.println(getWidth());
+		System.out.println(getHeight());
+		for(int i = 0; i < boardSizeX; i++) {
+			for(int j = 0; j < boardSizeY; j++) {
+				
+				locY += incWidth;
+			}
+			locX += incHeight;
+		}
+	}
 }

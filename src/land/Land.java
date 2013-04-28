@@ -1,5 +1,6 @@
 package land;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -64,6 +65,7 @@ public class Land {
 	            // handle exception...
 	     }
 	}
+	
 	public LandType getLandType() {
 		return landType;
 	}
@@ -77,11 +79,16 @@ public class Land {
 		if (resource != null) return true;
 		return false;
 	}
+	
 	public ResourceType getResourceType()
 	{
 		return resource;
 	}
 
+
+	public BufferedImage getImage() {
+		return image;
+	}
 
 	public boolean canContainRiver()
 	{

@@ -1,7 +1,7 @@
 package buildings;
 
 public class ImprovementBuilding extends Building {
-	public enum BuildingType {FARM, BARRACK, MINE, SAWMIL, TRADINGPOST, NONE}
+	public enum BuildingType {FARM, BARRACK, MINE, SAWMILL, TRADINGPOST, NONE}
 	private BuildingType buildingType;
 	public ImprovementBuilding(int locx, int locy, BuildingType buildingType, int wood, int stone, int gold) {
 		super(locx, locy, wood, stone, gold);
@@ -12,7 +12,7 @@ public class ImprovementBuilding extends Building {
 			case FARM:
 			case BARRACK:
 			case MINE:
-			case SAWMIL:
+			case SAWMILL:
 			case TRADINGPOST:
 		}
 	}

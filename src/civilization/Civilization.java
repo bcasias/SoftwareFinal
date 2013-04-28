@@ -91,12 +91,12 @@ public class Civilization {
 		for(ImprovementBuilding i : buildings)
 		{
 			if(i.hasResource()) {
-				switch(i.getBuildingType()) // FARM, BARRACK, MINE, SAWMIL, TRADINGPOST
+				switch(i.getBuildingType()) // FARM, BARRACK, MINE, SAWMILL, TRADINGPOST
 				{
 				case FARM : foodCount++;
 				case BARRACK:
 				case MINE:
-				case SAWMIL:
+				case SAWMILL:
 				case TRADINGPOST:
 				}// end switch
 			}// end if
