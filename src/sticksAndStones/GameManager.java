@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JPanel;
+
 import buildings.Building;
 import buildings.City;
 
@@ -14,7 +16,7 @@ import land.Land;
 import land.Land.LandType;
 
 
-public class GameManager {
+public class GameManager extends JPanel { // this draws the board to the screen
 	private static Land[][] map;
 	private Civilization playerCiv;
 	private int turn;
