@@ -18,7 +18,7 @@ public class ImprovementBuilding extends Building {
 			switch(buildingType)
 			{
 				case FARM: 			image = ImageIO.read(new File("Textures/Building/Farm")); break;
-				case BARRACK:		image = ImageIO.read(new File("Textures/Building/Barrack")); break;
+				case BARRACK:		image = ImageIO.read(new File("Textures/Building/Barracks")); break;
 				case MINE:			image = ImageIO.read(new File("Textures/Building/Mine")); break;
 				case SAWMILL:		image = ImageIO.read(new File("Textures/Building/SawMill")); break;
 				case TRADINGPOST:	image = ImageIO.read(new File("Textures/Building/TradingPost")); break;

@@ -34,7 +34,7 @@ public class City extends Building {
 		location = new Point(x,y);
 		landOwned.add(0);
 		try {
-			image = ImageIO.read(new File("Textures/Building/Village"));
+			image = ImageIO.read(new File("Textures/Building/Village.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class City extends Building {
 		{
 			cityType = CityType.TOWN;
 			try {
-				image = ImageIO.read(new File("Textures/Building/Town"));
+				image = ImageIO.read(new File("Textures/Building/Town.jpg"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,7 +67,7 @@ public class City extends Building {
 		{
 			cityType = CityType.CITY;
 			try {
-				image = ImageIO.read(new File("Textures/Building/Town"));
+				image = ImageIO.read(new File("Textures/Building/Town.jpg"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
