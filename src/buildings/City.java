@@ -33,14 +33,9 @@ public class City extends Building {
 		pop = 1;
 		location = new Point(x,y);
 		landOwned.add(0);
-		try {
-			image = ImageIO.read(new File("Textures/Building/Village.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		image = villageImage;
 	}
-	
+
 	public void update()
 	{
 		if(growPopulation <= 0)
@@ -52,26 +47,16 @@ public class City extends Building {
 		{
 			growPopulation--;
 		}
-		
+
 		if(pop >= 5 && pop < 10)
 		{
 			cityType = CityType.TOWN;
-			try {
-				image = ImageIO.read(new File("Textures/Building/Town.jpg"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			image = townImage;
 		}
 		else if (pop >= 10)
 		{
 			cityType = CityType.CITY;
-			try {
-				image = ImageIO.read(new File("Textures/Building/Town.jpg"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			image = cityImage;
 		}
 	}
 
@@ -82,7 +67,7 @@ public class City extends Building {
 	public int getPop() {
 		return pop;
 	}
-	
+
 	public boolean isLocatedAt(Point loc)
 	{
 		return location.equals(loc);

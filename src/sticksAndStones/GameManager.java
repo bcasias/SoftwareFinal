@@ -166,21 +166,24 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		//System.out.println(incWidth + ", " + incHeight);
 		for(int i = 0; i < boardSizeX; i++) {
 			for(int j = 0; j < boardSizeY; j++) {
-				map[i][j].draw(g, incWidth, incHeight, i * incHeight, j * incWidth);
+				map[i][j].draw(g, incWidth, incHeight, i * incHeight, j * incWidth); //draw land squares first
 				if (map[i][j].hasResource()) {
 				}
 			}
 		}
 		for (ImprovementBuilding b : playerCiv.getBuildings()) {
-			b.draw(g, incWidth, incHeight, (int) b.getLocation().getX() * incHeight, (int) b.getLocation().getY() * incWidth);
+			b.draw(g, incWidth, incHeight, (int) b.getLocation().getX() * incHeight, (int) b.getLocation().getY() * incWidth); //draw improvements second
 		}
 		for (City c : playerCiv.getCities()) {
-			c.draw(g, incWidth, incHeight, (int) c.getLocation().getX() * incHeight, (int) c.getLocation().getY() * incWidth);
+			c.draw(g, incWidth, incHeight, (int) c.getLocation().getX() * incHeight, (int) c.getLocation().getY() * incWidth); //draw cities third
+		}
+		for (Unit u : playerCiv.getUnits()) {
+			u.draw(g, incWidth, incHeight, (int) u.getLocation().getX() * incHeight, (int) u.getLocation().getY() * incWidth); //draw units 4th
 		}
 		for(int i = 0; i < boardSizeX; i++) {
 			for(int j = 0; j < boardSizeY; j++) {
 				if (map[i][j].hasResource()) {
-					map[i][j].drawResource(g, incWidth, incHeight, i * incHeight, j * incWidth);
+					map[i][j].drawResource(g, incWidth, incHeight, i * incHeight, j * incWidth); //draw resources 5th
 				}
 			}
 		}

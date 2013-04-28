@@ -1,5 +1,6 @@
 package civilization;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,16 +15,17 @@ import sticksAndStones.MovementManager;
 
 public class Unit {
 	private BufferedImage image;
+	private static BufferedImage warriorImage;
 	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
-		private char type;
-		private UnitType(char type)
-		{
-			this.type = type;
-		}
-		public char getType()
-		{
-			return type;
-		}
+	private char type;
+	private UnitType(char type)
+	{
+		this.type = type;
+	}
+	public char getType()
+	{
+		return type;
+	}
 	}
 	private UnitType unitType;
 	private Point position;
@@ -34,18 +36,22 @@ public class Unit {
 		position = loc;
 		unitType = type;
 		setAttributes();
+		image = warriorImage;
+	}
+
+	public static void initializeImages() {
 		try {
-			image = ImageIO.read(new File("Textures/Sprite/Warrior"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			warriorImage = ImageIO.read(new File("Textures/Sprite/Warrior.gif"));
+		} catch (Exception e) {
+			System.out.println("Unit loading has failed.");
 		}
 	}
-	
+
 	public void update()
 	{
 		moveCount = 2;
 	}
+	
 	private void setAttributes() {
 		switch(unitType)
 		{
@@ -53,7 +59,7 @@ public class Unit {
 		case KNIGHT:  strength = 5; health = 15; break;
 		case WARRIOR: strength = 7; health = 20; break;
 		case DEMON:  strength = 9; health = 40; break;
-		default: unitType = UnitType.SOLDIER; setAttributes();break;
+		default: unitType = UnitType.SOLDIER; setAttributes(); break;
 		}
 	}
 
@@ -61,7 +67,7 @@ public class Unit {
 	{
 		return position.equals(loc);
 	}
-	
+
 	public UnitType getUnitType()
 	{
 		return unitType;
@@ -70,14 +76,14 @@ public class Unit {
 	public int getHealth() {
 		return health;
 	}
-	
+
 	public void move(Direction direction)
 	{
 		Point newPoint = MovementManager.moveTo(this, direction); 
 		if(newPoint.equals(position))
 			return;
 		position = newPoint;
-		
+
 		switch(GameManager.getLandAt(position).getLandType())
 		{
 		case PLAIN:
@@ -91,10 +97,12 @@ public class Unit {
 		} 
 		return;
 	}
+	
 	public int getStrength()
 	{
 		return strength;
 	}
+	
 	public void takeDamage(int damage)
 	{
 		health -= damage;
@@ -112,9 +120,13 @@ public class Unit {
 	public int getMovementPoints() {
 		return moveCount;
 	}
-	
+
 	public BufferedImage getImage()
 	{
 		return image;
+	}
+	
+	public void draw(Graphics g, int sizeX, int sizeY, int locX, int locY) {
+		g.drawImage(image, locY + sizeX/4, locX + sizeY/4, sizeX/2, sizeY/2, null);
 	}
 }

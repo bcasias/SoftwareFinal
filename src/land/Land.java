@@ -21,6 +21,7 @@ public class Land {
 	public char getType() {return type;}
 	}
 	private BufferedImage image;
+	private static BufferedImage waterImage, mountainImage, hillImage, plainImage, desertImage, forestImage; //stores textures, only loads once
 	LandType landType;
 	private ResourceType resource;
 	private Boolean haveRiver;
@@ -41,6 +42,19 @@ public class Land {
 		initialize(locx, locy, landType, river, resourceType);
 	}
 
+	public static void initializeImages() {
+		try {
+			waterImage = ImageIO.read(new File("Textures/Land/Water.jpg"));
+			mountainImage = ImageIO.read(new File("Textures/Land/Mountain.jpg"));
+			hillImage = ImageIO.read(new File("Textures/Land/Hill.jpg"));
+			plainImage = ImageIO.read(new File("Textures/Land/Plain.jpg"));
+			desertImage = ImageIO.read(new File("Textures/Land/Desert.jpg"));
+			forestImage = ImageIO.read(new File("Textures/Land/Forest.jpg"));
+		} catch (Exception e) {
+			System.out.println("A texture image failed to load. Please check configuration files.");
+		}
+	}
+
 	private void initialize(int locx, int locy, LandType type, boolean river, ResourceType re)
 	{
 		this.locX = locx;
@@ -49,21 +63,15 @@ public class Land {
 		this.haveRiver = river;
 		this.resource = re;
 
-
-		try 
+		switch(landType)
 		{
-			switch(landType)
-			{
-			case WATER: 	image = ImageIO.read(new File("Textures/Land/Water.jpg")); break;
-			case DESERT:	image = ImageIO.read(new File("Textures/Land/Desert.jpg")); break;
-			case HILL:		image = ImageIO.read(new File("Textures/Land/Hill.jpg")); break;
-			case FOREST:	image = ImageIO.read(new File("Textures/Land/Forest.jpg")); break;
-			case PLAIN:		image = ImageIO.read(new File("Textures/Land/Plain.jpg")); break;
-			case MOUNTAIN:	image = ImageIO.read(new File("Textures/Land/Water.jpg")); break;
-			}// end switch
-		} catch (IOException ex) {
-			// handle exception...
-		}
+		case WATER: 	image = waterImage; break;
+		case DESERT:	image = desertImage; break;
+		case HILL:		image = hillImage; break;
+		case FOREST:	image = forestImage; break;
+		case PLAIN:		image = plainImage; break;
+		case MOUNTAIN:	image = mountainImage; break;
+		}// end switch
 	}
 
 	public LandType getLandType() {

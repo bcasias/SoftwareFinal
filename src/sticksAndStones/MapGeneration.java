@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import civilization.Unit;
+
+import buildings.Building;
+
 import resource.Resource.ResourceType;
 
 import land.Land;
@@ -28,6 +32,9 @@ public class MapGeneration {
 	}
 	public Land[][] generateMap(int width, int height)
 	{
+		Land.initializeImages(); //initialize all images used for land types
+		Building.initializeImages(); //initialize building images
+		Unit.initializeImages(); //initialize unit images
 		Land landMass[][] = new Land[height][width];
 		landMass = generateBasicLand(landMass);
 		landMass = clumpOfDesert(landMass);

@@ -12,22 +12,17 @@ public class ImprovementBuilding extends Building {
 	public ImprovementBuilding(int locx, int locy, BuildingType buildingType, int wood, int stone, int gold) {
 		super(locx, locy, wood, stone, gold);
 		this.buildingType = buildingType;
-		
-		try 
-		 {
-			switch(buildingType)
-			{
-				case FARM: 			image = ImageIO.read(new File("Textures/Building/Farm")); break;
-				case BARRACK:		image = ImageIO.read(new File("Textures/Building/Barracks")); break;
-				case MINE:			image = ImageIO.read(new File("Textures/Building/Mine")); break;
-				case SAWMILL:		image = ImageIO.read(new File("Textures/Building/SawMill")); break;
-				case TRADINGPOST:	image = ImageIO.read(new File("Textures/Building/TradingPost")); break;
-			}
-	     } catch (IOException ex) {
-	            // handle exception...
-	     }
+
+		switch(buildingType)
+		{
+		case FARM: 			image = farmImage; break;
+		case BARRACK:		image = barrackImage; break;
+		case MINE:			image = mineImage; break;
+		case SAWMILL:		image = sawMillImage; break;
+		case TRADINGPOST:	image = tradingPostImage; break;
+		}
 	}
-	
+
 	public boolean hasResource()
 	{
 		return (buildingType == BuildingType.NONE) ? true: false;
