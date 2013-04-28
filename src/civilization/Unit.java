@@ -1,13 +1,19 @@
 package civilization;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import sticksAndStones.Direction;
 import sticksAndStones.GameManager;
 import sticksAndStones.MovementManager;
 
 public class Unit {
+	private BufferedImage image;
 	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
 		private char type;
 		private UnitType(char type)
@@ -28,6 +34,12 @@ public class Unit {
 		position = loc;
 		unitType = type;
 		setAttributes();
+		try {
+			image = ImageIO.read(new File("Textures/Sprite/Warrior"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void update()

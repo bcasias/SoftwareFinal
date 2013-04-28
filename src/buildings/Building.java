@@ -1,11 +1,13 @@
 package buildings;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 public abstract class Building {
 	
 	private int woodCost, goldCost, stoneCost;
 	protected Point location;
+	protected BufferedImage image;
 	public Building(int locx, int locy, int wood, int stone, int gold)
 	{
 		location = new Point(locx, locy);

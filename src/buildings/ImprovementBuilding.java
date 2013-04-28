@@ -1,5 +1,11 @@
 package buildings;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class ImprovementBuilding extends Building {
 	public enum BuildingType {FARM, BARRACK, MINE, SAWMIL, TRADINGPOST, NONE}
 	private BuildingType buildingType;
@@ -7,14 +13,19 @@ public class ImprovementBuilding extends Building {
 		super(locx, locy, wood, stone, gold);
 		this.buildingType = buildingType;
 		
-		switch(buildingType)
-		{
-			case FARM:
-			case BARRACK:
-			case MINE:
-			case SAWMIL:
-			case TRADINGPOST:
-		}
+		try 
+		 {
+			switch(buildingType)
+			{
+				case FARM: 			image = ImageIO.read(new File("Textures/Building/Farm")); break;
+				case BARRACK:		image = ImageIO.read(new File("Textures/Building/Barrack")); break;
+				case MINE:			image = ImageIO.read(new File("Textures/Building/Mine")); break;
+				case SAWMIL:		image = ImageIO.read(new File("Textures/Building/SawMill")); break;
+				case TRADINGPOST:	image = ImageIO.read(new File("Textures/Building/TradingPost")); break;
+			}
+	     } catch (IOException ex) {
+	            // handle exception...
+	     }
 	}
 	
 	public boolean hasResource()
