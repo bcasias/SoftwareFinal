@@ -130,4 +130,8 @@ public class Land {
 			return false;
 		return true;
 	}
+	public BufferedImage getImage()
+	{
+		return image;
+	}
 }
