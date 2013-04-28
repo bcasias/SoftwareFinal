@@ -4,16 +4,14 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Set;
 
-import civilization.Unit.UnitType;
-
-import resource.Resource.ResourceType;
-
-import land.Land;
-import land.Land.LandType;
-
 import buildings.Building;
 import buildings.City;
 import buildings.ImprovementBuilding;
+
+import civilization.Unit.UnitType;
+
+import land.Land;
+import land.Land.LandType;
 
 public class Civilization {
 	private ArrayList<City> cities;
@@ -29,7 +27,7 @@ public class Civilization {
 		map = board;
 		buildings = new ArrayList<ImprovementBuilding>();
 		cities = new ArrayList<City>();
-		cities.add(new City(0,0));
+		//cities.add(new City(0,0));
 		civLand = new ArrayList<Land>();
 		goldCount = 10;
 		foodCount = 10;

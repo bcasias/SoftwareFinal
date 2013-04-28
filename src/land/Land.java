@@ -1,5 +1,6 @@
 package land;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,40 +8,39 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import resource.Resource;
 import resource.Resource.ResourceType;
 import buildings.Building;
 
 public class Land {
 	public enum LandType {FOREST('F'), HILL('H'), WATER('W'), DESERT('D'), MOUNTAIN('M'), PLAIN('P'), NONE('N');
-		private char type;
-		private LandType(char type) 
-		{
-			this.type = type;
-		}
-		public char getType() {return type;}
+	private char type;
+	private LandType(char type) 
+	{
+		this.type = type;
+	}
+	public char getType() {return type;}
 	}
 	private BufferedImage image;
 	LandType landType;
 	private ResourceType resource;
 	private Boolean haveRiver;
 	private int locX, locY;
-	
+
 	public Land(int locx, int locy, LandType type)
 	{
 		initialize(locx, locy, type, false, ResourceType.NONE);
 	}
-	
+
 	public Land(int locx, int locy, LandType type, boolean haveRiver)
 	{
 		initialize(locx, locy, type, haveRiver, ResourceType.NONE);
 	}
-	
+
 	public Land(int locx, int locy, LandType landType, boolean river, ResourceType resourceType)
 	{
 		initialize(locx, locy, landType, river, resourceType);
 	}
-	
+
 	private void initialize(int locx, int locy, LandType type, boolean river, ResourceType re)
 	{
 		this.locX = locx;
@@ -48,24 +48,24 @@ public class Land {
 		this.landType = type;
 		this.haveRiver = river;
 		this.resource = re;
-		
-		
-		 try 
-		 {
-			 switch(landType)
-				{
-					case WATER: 	image = ImageIO.read(new File("Textures/Land/Water")); break;
-					case DESERT:	image = ImageIO.read(new File("Textures/Land/Desert")); break;
-					case HILL:		image = ImageIO.read(new File("Textures/Land/HILL")); break;
-					case FOREST:	image = ImageIO.read(new File("Textures/Land/Forest")); break;
-					case PLAIN:		image = ImageIO.read(new File("Textures/Land/PLain")); break;
-					case MOUNTAIN:	image = ImageIO.read(new File("Textures/Land/Water")); break;
-				}// end switch
-	     } catch (IOException ex) {
-	            // handle exception...
-	     }
+
+
+		try 
+		{
+			switch(landType)
+			{
+			case WATER: 	image = ImageIO.read(new File("Textures/Land/Water.jpg")); break;
+			case DESERT:	image = ImageIO.read(new File("Textures/Land/Desert.jpg")); break;
+			case HILL:		image = ImageIO.read(new File("Textures/Land/Hill.jpg")); break;
+			case FOREST:	image = ImageIO.read(new File("Textures/Land/Forest.jpg")); break;
+			case PLAIN:		image = ImageIO.read(new File("Textures/Land/Plain.jpg")); break;
+			case MOUNTAIN:	image = ImageIO.read(new File("Textures/Land/Water.jpg")); break;
+			}// end switch
+		} catch (IOException ex) {
+			// handle exception...
+		}
 	}
-	
+
 	public LandType getLandType() {
 		return landType;
 	}
@@ -76,10 +76,10 @@ public class Land {
 
 	public boolean hasResource()
 	{
-		if (resource != null) return true;
+		if (resource != ResourceType.NONE) return true;
 		return false;
 	}
-	
+
 	public ResourceType getResourceType()
 	{
 		return resource;
@@ -101,7 +101,7 @@ public class Land {
 			return true;
 		}
 	}
-	
+
 	@Override
 	public String toString()
 	{
@@ -130,8 +130,22 @@ public class Land {
 			return false;
 		return true;
 	}
-	
+
 	public void draw(Graphics g, int sizeX, int sizeY, int locX, int locY) {
-		g.drawImage(image, sizeX, sizeY, locX, locY, null);
+		g.drawImage(image, locY, locX, sizeX, sizeY, null);
+	}
+
+	public void drawResource(Graphics g, int sizeX, int sizeY, int locX, int locY) {
+		g.setColor(Color.BLACK);
+		g.fillRect(locY + 5, locX + 5, 9*resource.toString().length(), 12);
+		switch (resource) {
+		case FOOD:
+			g.setColor(Color.ORANGE);
+			break;
+		default:
+			g.setColor(Color.GREEN);
+			break;
+		}
+		g.drawString(resource.toString(), locY + 5, locX + 15);
 	}
 }

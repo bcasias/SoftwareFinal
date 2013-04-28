@@ -40,6 +40,6 @@ public abstract class Building {
 	}
 	
 	public void draw(Graphics g, int sizeX, int sizeY, int locX, int locY) {
-		g.drawImage(image, sizeX, sizeY, locX, locY, null);
+		g.drawImage(image, locY, locX, sizeX, sizeY, null);
 	}
 }

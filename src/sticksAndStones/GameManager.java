@@ -56,9 +56,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 	
 	public class resizeListener extends ComponentAdapter {
-		public void componentResized(ComponentEvent e) {
-			//draw();
-		}
+		public void componentResized(ComponentEvent e) {} //empty function forces size to update properly
 	}
 	
 	public static int calculateIndex(int x, int y) {
@@ -124,7 +122,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return map[point.x][point.y];
 	}
 
-	public String[][] drawOUtline()
+	public String[][] drawOutline()
 	// creates a list of what to draw in each cell
 	// format "<landType>,<City>, <Unit> "
 	{
@@ -162,18 +160,29 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		int locX = 0, locY = 0;
+		super.paintComponent(g);
 		int incWidth = getWidth()/boardSizeY;
 		int incHeight = getHeight()/boardSizeX;
+		//System.out.println(incWidth + ", " + incHeight);
 		for(int i = 0; i < boardSizeX; i++) {
 			for(int j = 0; j < boardSizeY; j++) {
-				map[i][j].draw(g, incWidth, incHeight, locX, locY);
-				locY += incWidth;
+				map[i][j].draw(g, incWidth, incHeight, i * incHeight, j * incWidth);
+				if (map[i][j].hasResource()) {
+				}
 			}
-			locX += incHeight;
 		}
 		for (ImprovementBuilding b : playerCiv.getBuildings()) {
 			b.draw(g, incWidth, incHeight, (int) b.getLocation().getX() * incHeight, (int) b.getLocation().getY() * incWidth);
+		}
+		for (City c : playerCiv.getCities()) {
+			c.draw(g, incWidth, incHeight, (int) c.getLocation().getX() * incHeight, (int) c.getLocation().getY() * incWidth);
+		}
+		for(int i = 0; i < boardSizeX; i++) {
+			for(int j = 0; j < boardSizeY; j++) {
+				if (map[i][j].hasResource()) {
+					map[i][j].drawResource(g, incWidth, incHeight, i * incHeight, j * incWidth);
+				}
+			}
 		}
 	}
 }

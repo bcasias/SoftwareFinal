@@ -395,7 +395,7 @@ public class MapGeneration {
 					else 
 						land[i][j] = new Land(i,j,LandType.HILL,haveRiver, ResourceType.GOLD);
 				}
-				else if(land[i][j].getLandType() == LandType.FOREST && haveResource)
+				else if(land[i][j].getLandType() == LandType.FOREST)
 				{
 					haveRiver = land[i][j].hasRiver();
 					land[i][j] = new Land(i,j,LandType.FOREST,haveRiver, ResourceType.WOOD);

@@ -22,7 +22,7 @@ public class SticksandStone extends JFrame {
 		this.add(gameManager, BorderLayout.CENTER);
 		this.add(controlGUI, BorderLayout.SOUTH);
 		this.add(statusBar, BorderLayout.EAST);
-		this.setSize(800, 800);
+		this.setSize(800, 800); //default size when not full-screen
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
