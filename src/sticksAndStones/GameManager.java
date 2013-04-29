@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import buildings.Building;
@@ -115,6 +116,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	public void buildBuilding(int locX, int locY, Building building)
 	{
 		playerCiv.makeBuilding(locX, locY, building);
+		statusBar.update(); //update resources
 	}
 
 	public static void forceTurn(int i) {
@@ -126,11 +128,26 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 
 	public boolean gameEnd() {
-		if (playerCiv.getHappiness() == 0) return true; //lose if happiness reaches 0
-		if (turn == 100) return true; //lose on turn 100 if not winning
-		if (playerCiv.getLand().size() > 24) return true;
-		if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125)
+		if (playerCiv.getHappiness() == 0) {
+			JOptionPane.showMessageDialog(null, "Your people have starved and destroyed your civilization in a series of riots..." +
+					"\nYou lose!");
+			return true; //lose if happiness reaches 0
+		}
+		if (turn == 100) {
+			JOptionPane.showMessageDialog(null, "You have taken too long to develop, and the fierce Yeti has destroyed your civilization!" +
+					"\nYou lose!");
+			return true; //lose on turn 100 if not winning
+		}
+		if (playerCiv.getLand().size() > 24) {
+			JOptionPane.showMessageDialog(null, "You have developed your civilization into a sprawling empire, one that will stand the test of time!" +
+					"\nYou win!");
 			return true;
+		}
+		if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125) {
+			JOptionPane.showMessageDialog(null, "Your stockpiles are so plentiful that your civilization is the envy of all..." +
+					"\nYou win!");
+			return true;
+		}
 		return false;
 	}
 	
