@@ -34,15 +34,9 @@ public class StatusBar extends JPanel {
 	
 	public void update( )
 	{
-		this.removeAll();
-		this.status = new Status(  humanCiv.getStoneCount(), 
-				humanCiv.getWoodCount(), 
-				humanCiv.getGoldCount(),
-				humanCiv.getFoodCount(), 
-				humanCiv.getHappiness());
-		this.cityPanel = new CityPanel(humanCiv.getCities());
-		this.unitPanel = new UnitPanel(humanCiv.getUnits());
-		setupGUI();
+		status.update(humanCiv.getStoneCount(), humanCiv.getWoodCount(), humanCiv.getGoldCount(),
+				humanCiv.getFoodCount(), humanCiv.getHappiness());
+		
 	}
 
 	private void SetName(String name)
@@ -131,6 +125,7 @@ public class StatusBar extends JPanel {
 			goldt.setText(Integer.toString(gold));
 			foodt.setText(Integer.toString(food));
 			happinesst.setText(Integer.toString(happiness));
+			turnt.setText(Integer.toString(GameManager.getTurn()));
 		}
 	}// end class
 

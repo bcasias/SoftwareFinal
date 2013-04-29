@@ -107,7 +107,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	
 	public void nextTurn() {
 		playerCiv.update();
-		//statusBar.update();
+		statusBar.update();
 		gameEnd();
 		turn++;		
 	}
