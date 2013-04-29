@@ -174,7 +174,6 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		super.paintComponent(g);
 		int incWidth = getWidth()/boardSizeY;
 		int incHeight = getHeight()/boardSizeX;
-		//System.out.println(incWidth + ", " + incHeight);
 		for(int i = 0; i < boardSizeX; i++) {
 			for(int j = 0; j < boardSizeY; j++) {
 				map[i][j].draw(g, incWidth, incHeight, i * incHeight, j * incWidth); //draw land squares first
@@ -191,6 +190,9 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		for (Unit u : playerCiv.getUnits()) {
 			u.draw(g, incWidth, incHeight, (int) u.getLocation().getX() * incHeight, (int) u.getLocation().getY() * incWidth); //draw units 4th
 		}
+		g.setColor(Color.BLUE);
+		for (Land c : playerCiv.getLand()) 
+			g.drawRect(c.getLocY() * incWidth, c.getLocX() * incHeight, incWidth, incHeight);
 		g.setColor(Color.RED);
 		if (selectedLocation != null) 
 			g.drawRect((int) selectedLocation.getY() * incWidth, (int) selectedLocation.getX() * incHeight, incWidth, incHeight);
@@ -206,8 +208,11 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	public void mapToGrid(int x, int y) {
 		int incWidth = getWidth()/boardSizeY;
 		int incHeight = getHeight()/boardSizeX;
-		selectedLocation = new Point(y/incHeight, x/incWidth);
-		this.repaint();
+		Point newLoc = new Point(y/incHeight, x/incWidth);
+		if (newLoc != selectedLocation) {
+			selectedLocation = newLoc;
+			this.repaint();
+		}
 	}
 	
 	private void updateControlGUI( ) {
@@ -243,8 +248,6 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	{
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			mapToGrid(e.getX(), e.getY());
-			updateControlGUI();
 		}
 
 		@Override
@@ -267,7 +270,8 @@ public class GameManager extends JPanel { // this draws the board to the screen
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
+			mapToGrid(e.getX(), e.getY());
+			updateControlGUI();
 			
 		}
 	}

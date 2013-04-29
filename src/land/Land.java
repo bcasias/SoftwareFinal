@@ -78,6 +78,14 @@ public class Land {
 		return landType;
 	}
 
+	public int getLocX() {
+		return locX;
+	}
+
+	public int getLocY() {
+		return locY;
+	}
+
 	public boolean hasRiver() {
 		return haveRiver;
 	}
