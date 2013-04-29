@@ -29,15 +29,28 @@ public class StatusBar extends JPanel {
 									humanCiv.getHappiness());
 		this.cityPanel = new CityPanel(humanCiv.getCities());
 		this.unitPanel = new UnitPanel(humanCiv.getUnits());
-		this.SetupGUI();
+		this.setupGUI();
 	}
 	
+	public void update( )
+	{
+		this.removeAll();
+		this.status = new Status(  humanCiv.getStoneCount(), 
+				humanCiv.getWoodCount(), 
+				humanCiv.getGoldCount(),
+				humanCiv.getFoodCount(), 
+				humanCiv.getHappiness());
+		this.cityPanel = new CityPanel(humanCiv.getCities());
+		this.unitPanel = new UnitPanel(humanCiv.getUnits());
+		setupGUI();
+	}
+
 	private void SetName(String name)
 	{
 		this.civName = name;
 	}
 	
-	private void SetupGUI()
+	private void setupGUI()
 	{
 		this.add(status);
 		this.add(cityPanel);
