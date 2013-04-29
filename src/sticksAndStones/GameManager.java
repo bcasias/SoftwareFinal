@@ -106,10 +106,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 	
 	public void nextTurn() {
+		turn++;	
 		playerCiv.update();
 		statusBar.update();
 		gameEnd();
-		turn++;		
 	}
 	
 	public void buildBuilding(int locX, int locY, Building building)
