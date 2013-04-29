@@ -214,7 +214,6 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			this.repaint();
 		}
 	}
-	
 	private void updateControlGUI( ) {
 		controlGUI.setAllToFalse();
 		// TODO select unit is needed
