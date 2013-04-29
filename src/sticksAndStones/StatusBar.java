@@ -53,8 +53,8 @@ public class StatusBar extends JPanel {
 	
 	class Status extends JPanel
 	{
-		private JLabel stonel, woodl, goldl, foodl, happinessl;
-		private JTextField stonet, woodt, goldt, foodt, happinesst;
+		private JLabel stonel, woodl, goldl, foodl, happinessl, turnl;
+		private JTextField stonet, woodt, goldt, foodt, happinesst, turnt;
 		public Status (int stone, int wood, int gold, int food, int happiness)
 		{
 			
@@ -63,6 +63,7 @@ public class StatusBar extends JPanel {
 			this.goldl = new JLabel("Gold");
 			this.foodl = new JLabel("Food");
 			this.happinessl = new JLabel("Happiness");
+			this.turnl = new JLabel("Turn");
 			
 			this.stonet = new JTextField(3);
 			stonet.setText(Integer.toString(stone));
@@ -84,22 +85,28 @@ public class StatusBar extends JPanel {
 			happinesst.setText(Integer.toString(happiness));
 			happinesst.setEditable(false);
 			
+			this.turnt = new JTextField(3);
+			turnt.setText(Integer.toString(GameManager.getTurn()));
+			turnt.setEditable(false);
+			
 			createGUI();
 		}
 		
 		public void createGUI()
 		{
 			this.setLayout(new GridLayout(0,2));
+			this.add(turnl);
+			this.add(turnt);
 			this.add(goldl);
 			this.add(goldt);
-			this.add(happinessl);
-			this.add(happinesst);
-			this.add(foodl);
-			this.add(foodt);
 			this.add(woodl);
 			this.add(woodt);
 			this.add(stonel);
 			this.add(stonet);
+			this.add(foodl);
+			this.add(foodt);
+			this.add(happinessl);
+			this.add(happinesst);
 			this.setBorder(new TitledBorder("Status: "));
 			this.setVisible(true);
 		}
