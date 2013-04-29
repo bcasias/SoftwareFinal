@@ -32,6 +32,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private static int boardSizeY = 10;
 	private Unit monster;
 	private ControlGUI controlGUI;
+	private StatusBar statusBar;
 	private Point selectedLocation;
 	
 	public GameManager(ControlGUI controlGUI)
@@ -60,6 +61,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		this.addComponentListener(new resizeListener());
 		this.repaint();
 		// TODO add in monster
+	}
+	
+	public void addStatusBar(StatusBar statusBar) {
+		this.statusBar = statusBar;
 	}
 	
 	public class resizeListener extends ComponentAdapter {
@@ -102,6 +107,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	
 	public void nextTurn() {
 		playerCiv.update();
+		//statusBar.update();
 		gameEnd();
 		turn++;		
 	}
