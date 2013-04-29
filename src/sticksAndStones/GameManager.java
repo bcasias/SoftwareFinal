@@ -204,7 +204,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		int incHeight = getHeight()/boardSizeX;
 		selectedLocation = new Point(y/incHeight, x/incWidth);
 	}
-	private void updateContorlGUI( ) {
+	private void updateContolGUI( ) {
 		controlGUI.setAllToFalse();
 		// TODO select unit is needed
 		// consider land
@@ -235,11 +235,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	
 	class clickListener implements MouseListener
 	{
-
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			mapToGrid(e.getX(), e.getY());
-			updateContorlGUI();
+			updateContolGUI();
 		}
 
 		@Override
