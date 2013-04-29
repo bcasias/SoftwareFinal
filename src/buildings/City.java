@@ -25,7 +25,7 @@ public class City extends Building {
 	private int growPopulation;
 	private int pop;
 
-	public City(int x, int y) {
+	public City(int x, int y) { 
 		super(x, y, 5, 5, 5);
 		growPopulation = 5;
 		cityType = CityType.VILLAGE;

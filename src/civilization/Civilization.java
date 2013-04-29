@@ -228,16 +228,6 @@ public class Civilization {
 	
 	}
 	
-	public int getNumberofTechs() {
-		// TODO Auto-generated method stub
-		return -1;
-	}
-	
-	public void researchNewTech(String string) {
-		// TODO Auto-generated method stub
-	
-	}
-	
 	public ArrayList<Land> getLand() {
 		return civLand;
 	}

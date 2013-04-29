@@ -17,8 +17,9 @@ public class SticksandStone extends JFrame {
 	
 	public SticksandStone()
 	{
-		gameManager = new GameManager();
 		controlGUI = new ControlGUI();
+		gameManager = new GameManager(controlGUI);
+		controlGUI.addManager(gameManager);
 		statusBar = new StatusBar(gameManager.getPlayerCiv());
 		this.setLayout(new BorderLayout());
 		this.setTitle("Sticks and Stones");

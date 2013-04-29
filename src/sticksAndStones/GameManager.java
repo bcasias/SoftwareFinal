@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,8 +30,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private static int boardSizeX = 10;
 	private static int boardSizeY = 10;
 	private Unit monster;
+	private ControlGUI controlGUI;
+	private Point selectedLocation;
 	
-	public GameManager()
+	public GameManager(ControlGUI controlGUI)
 	{
 		MapGeneration g = new MapGeneration();
 		map =  g.generateMap(boardSizeX, boardSizeY);
@@ -38,6 +42,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		boolean foundPlaceForCity = false;
 		int randX, randY;
 		Random rand = new Random();
+		this.controlGUI = controlGUI;
 		// place city
 		while(!foundPlaceForCity)
 		{
@@ -50,6 +55,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			}
 		}
 		turn = 0;
+		this.addMouseListener(new clickListener());
 		this.addComponentListener(new resizeListener());
 		this.repaint();
 		// TODO add in monster
@@ -95,7 +101,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	
 	public void nextTurn() {
 		playerCiv.update();
-		gameEnd(); // TODO Logic???
+		gameEnd();
 		turn++;		
 	}
 	
@@ -190,6 +196,74 @@ public class GameManager extends JPanel { // this draws the board to the screen
 					map[i][j].drawResource(g, incWidth, incHeight, i * incHeight, j * incWidth); //draw resources 5th
 				}
 			}
+		}
+	}
+	
+	public void mapToGrid(int x, int y) {
+		int incWidth = getWidth()/boardSizeY;
+		int incHeight = getHeight()/boardSizeX;
+		selectedLocation = new Point(y/incHeight, x/incWidth);
+	}
+	private void updateContorlGUI( ) {
+		controlGUI.setAllToFalse();
+		// TODO select unit is needed
+		// consider land
+		// producing material
+		if(playerCiv.hasCityAt(selectedLocation))
+		{
+			if(playerCiv.hasUnitAt(selectedLocation))
+			{
+				controlGUI.makeMoveControlTrue();
+			}
+			else
+			{
+				controlGUI.showMakeUnitButton();
+			}
+			
+		}
+		else
+		{
+			if(map[selectedLocation.x][selectedLocation.y].getLandType() != LandType.MOUNTAIN && 
+			map[selectedLocation.x][selectedLocation.y].getLandType() != LandType.WATER)
+				controlGUI.makeBuildingTrue();
+		}
+	}
+
+	public void setHighlightedCell(Point p) {
+		selectedLocation = p;
+	}
+	
+	class clickListener implements MouseListener
+	{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			mapToGrid(e.getX(), e.getY());
+			updateContorlGUI();
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 }

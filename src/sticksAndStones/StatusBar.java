@@ -136,8 +136,8 @@ public class StatusBar extends JPanel {
 			this.removeAll();
 			for(City c : cities)
 			{
-				JTextField field = new JTextField("X: " + Integer.toString(c.getLocation().x) +
-						", Y: " + Integer.toString(c.getLocation().y) + ", Pop: " + 
+				JTextField field = new JTextField("X: " + Integer.toString(c.getLocation().x + 1) +
+						", Y: " + Integer.toString(c.getLocation().y + 1) + ", Pop: " + 
 						Integer.toString(c.getPop()));
 				field.setEditable(false);
 				this.add(field);
@@ -162,8 +162,8 @@ public class StatusBar extends JPanel {
 			this.removeAll();
 			for(Unit u : units)
 			{
-				JTextField field = new JTextField("X: " + Integer.toString(u.getLocation().x) +
-						", Y: " + Integer.toString(u.getLocation().y) + ", Strength: " + 
+				JTextField field = new JTextField("X: " + Integer.toString(u.getLocation().x + 1) +
+						", Y: " + Integer.toString(u.getLocation().y + 1) + ", Strength: " + 
 						Integer.toString(u.getStrength()) + ", Health: " + Integer.toString(u.getHealth()));
 				field.setEditable(false);
 				this.add(field);
