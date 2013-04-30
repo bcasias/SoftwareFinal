@@ -11,6 +11,7 @@ import resource.Resource.ResourceType;
 import buildings.Building;
 import buildings.City;
 import buildings.ImprovementBuilding;
+import buildings.ImprovementBuilding.BuildingType;
 
 import civilization.Unit.UnitType;
 
@@ -176,30 +177,43 @@ public class Civilization { //contains all of the methods for the player's civ
 		// Units cost Gold
 		if(goldCount < 5)
 			return false;
+		Point buildLocation = selectedLocation;
+		for(Unit u : units)
+		{
+			if(u.isAtLocation(buildLocation)) // unit on the city tile
+				return false;
+		}
+
 		goldCount -= 5;
-		Point cityLocaiton = selectedLocation;
 		for(City c : cities)
 		{
-			if(c.isLocatedAt(cityLocaiton))
+			if(c.isLocatedAt(buildLocation))
 			{
-				for(Unit u : units)
-				{
-					if(u.isAtLocation(cityLocaiton)) // unit on the city tile
-						return false;
-				} // end for
+				 // end for
 				// for unit Strength
 				switch(c.getCityType())
 				{
-				case VILLAGE: units.add(new Unit(cityLocaiton, UnitType.SOLDIER)); 
+				case VILLAGE: units.add(new Unit(buildLocation, UnitType.SOLDIER)); 
 				return true; // SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
-				case TOWN: 	units.add(new Unit(cityLocaiton, UnitType.KNIGHT)); 
+				case TOWN: 	units.add(new Unit(buildLocation, UnitType.KNIGHT)); 
 				return true;
-				case CITY:units.add(new Unit(cityLocaiton, UnitType.WARRIOR)); 
+				case CITY:units.add(new Unit(buildLocation, UnitType.WARRIOR)); 
 				return true;
 				}
 				
 			}// end if
 		}// end for
+		for (ImprovementBuilding b : buildings) {
+			if (b.getBuildingType() == BuildingType.BARRACK && b.isLocatedAt(buildLocation)) { //able to build from barracks
+				for(Unit u : units)
+				{
+					if(u.isAtLocation(buildLocation)) // unit on the city tile
+						return false;
+				} // end for
+				units.add(new Unit(buildLocation, UnitType.SOLDIER));
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -308,6 +322,13 @@ public class Civilization { //contains all of the methods for the player's civ
 
 	public ArrayList<Unit> getUnits() {
 		return units;
+	}
+
+	public ImprovementBuilding getImprovementBuildingAt(Point point) {
+		for(ImprovementBuilding b : buildings)
+			if(b.isLocatedAt(point))
+				return b;
+		return null;
 	}
 
 }

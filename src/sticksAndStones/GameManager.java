@@ -21,6 +21,7 @@ import resource.Resource.ResourceType;
 import buildings.Building;
 import buildings.City;
 import buildings.ImprovementBuilding;
+import buildings.ImprovementBuilding.BuildingType;
 
 import civilization.Civilization;
 import civilization.Unit;
@@ -376,6 +377,11 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		}
 		else
 		{
+			if(playerCiv.hasImprovementBuildingAt(selectedLocation)) {
+				if (playerCiv.getImprovementBuildingAt(selectedLocation).getBuildingType() == BuildingType.BARRACK
+						&& !playerCiv.hasUnitAt(selectedLocation)) 
+					controlGUI.showMakeUnitButton();
+			}
 			if(playerCiv.hasUnitAt(selectedLocation))
 			{
 				controlGUI.makeMoveControlTrue();
