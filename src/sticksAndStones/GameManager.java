@@ -35,7 +35,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private static int turn;
 	private static int boardSizeX = 10;
 	private static int boardSizeY = 10;
-	private Unit monster;
+	private Unit yeti;
 	private ControlGUI controlGUI;
 	private StatusBar statusBar;
 	private Point selectedLocation;
@@ -63,6 +63,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 				playerCiv = new Civilization(map, randX, randY);
 			}
 		}
+		
 		turn = 0;
 		this.addMouseListener(new clickListener());
 		this.addComponentListener(new resizeListener());
@@ -137,6 +138,14 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			if (building instanceof City) buildPerTurn++;
 			}
 		statusBar.update(); //update resources
+		this.repaint();
+	}
+	
+	public void buildUnit()
+	{
+		playerCiv.makeUnit(selectedLocation);
+		statusBar.update();
+		controlGUI.setAllToFalse();
 		this.repaint();
 	}
 
@@ -339,5 +348,15 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			updateControlGUI();
 			
 		}
+	}
+
+	public void updateStatus() {
+		statusBar.update();
+		
+	}
+
+	public void setSelectedLocation(Point position) {
+		selectedLocation = position;
+		
 	}
 }

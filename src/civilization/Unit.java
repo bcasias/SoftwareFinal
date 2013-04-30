@@ -35,10 +35,15 @@ public class Unit {
 	{
 		position = loc;
 		unitType = type;
+		moveCount = 0;
 		setAttributes();
 		image = warriorImage;
 	}
 
+	public int getMoveCount()
+	{
+		return moveCount;
+	}
 	public static void initializeImages() {
 		try {
 			warriorImage = ImageIO.read(new File("Textures/Sprite/Warrior.gif"));
@@ -77,7 +82,7 @@ public class Unit {
 		return health;
 	}
 
-	public void move(Direction direction)
+	public void move(Direction direction, GameManager game)
 	{
 		Point newPoint = MovementManager.moveTo(this, direction); 
 		if(newPoint.equals(position))
@@ -95,6 +100,9 @@ public class Unit {
 			moveCount -= 2;
 			break;
 		} 
+		game.updateStatus();
+		game.repaint();
+		game.setSelectedLocation(position);
 		return;
 	}
 	

@@ -7,13 +7,20 @@ import civilization.Civilization;
 import civilization.Unit;
 
 public class MovementManager {
+	private static GameManager game;
 	private static ArrayList<Civilization> civs = new ArrayList<Civilization>();
 	public MovementManager()
 	{
+
 	}
 	public static void addCiv(Civilization c)
 	{
 		civs.add(c);
+	}
+	
+	public static void  addManager(GameManager g)
+	{
+		game = g;
 	}
 	
 	// TODO adding can't move on mountains and decrement movement points
@@ -25,19 +32,19 @@ public class MovementManager {
 		switch(direction)
 		{
 			case NORTH: 
-				endPoint = new Point(currentLocation.x, currentLocation.y - 1); 
+				endPoint = new Point(currentLocation.x - 1, currentLocation.y ); 
 				if(!validPoint(endPoint)) return currentLocation;
 				break;
 			case EAST:  
-				endPoint = new Point(currentLocation.x + 1, currentLocation.y); 
-				if(!validPoint(endPoint)) return currentLocation;
-				break;
-			case SOUTH: 
 				endPoint = new Point(currentLocation.x, currentLocation.y + 1); 
 				if(!validPoint(endPoint)) return currentLocation;
 				break;
+			case SOUTH: 
+				endPoint = new Point(currentLocation.x + 1, currentLocation.y); 
+				if(!validPoint(endPoint)) return currentLocation;
+				break;
 			case WEST:  
-				endPoint = new Point(currentLocation.x -1, currentLocation.y); 
+				endPoint = new Point(currentLocation.x, currentLocation.y - 1); 
 				if(!validPoint(endPoint)) return currentLocation;
 				break;
 			default: 

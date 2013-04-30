@@ -167,13 +167,13 @@ public class Civilization {
 		return false;
 	}
 	
-	public boolean makeUnit(int cityLocX, int cityLocY, UnitType type)
+	public boolean makeUnit(Point selectedLocation)
 	{
 		// Units cost Gold
 		if(goldCount < 5)
 			return false;
 		goldCount -= 5;
-		Point cityLocaiton = new Point(cityLocX, cityLocY);
+		Point cityLocaiton = selectedLocation;
 		for(City c : cities)
 		{
 			if(c.isLocatedAt(cityLocaiton))
@@ -183,8 +183,17 @@ public class Civilization {
 					if(u.isAtLocation(cityLocaiton)) // unit on the city tile
 						return false;
 				} // end for
-				units.add(new Unit(cityLocaiton, type));
+				// for unit Strength
+				switch(c.getCityType())
+				{
+				case VILLAGE: units.add(new Unit(cityLocaiton, UnitType.SOLDIER)); 
+				return true; // SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
+				case TOWN: 	units.add(new Unit(cityLocaiton, UnitType.KNIGHT)); 
 				return true;
+				case CITY:units.add(new Unit(cityLocaiton, UnitType.WARRIOR)); 
+				return true;
+				}
+				
 			}// end if
 		}// end for
 		return false;

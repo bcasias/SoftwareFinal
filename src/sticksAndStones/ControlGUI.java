@@ -188,16 +188,17 @@ public class ControlGUI extends JPanel{
 		public class ButtonListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == moveUp) {
-					
+							game.getPlayerCiv().getUnitAt(game.getSelectedLocation()).move(Direction.NORTH, game);
 				} else if (e.getSource() == moveRight) {
-					
+					game.getPlayerCiv().getUnitAt(game.getSelectedLocation()).move(Direction.EAST, game);
 				} else if (e.getSource() == moveLeft) {
-					
+					game.getPlayerCiv().getUnitAt(game.getSelectedLocation()).move(Direction.WEST, game);
 				} else if (e.getSource() == moveDown) {
-					
+					game.getPlayerCiv().getUnitAt(game.getSelectedLocation()).move(Direction.SOUTH, game);
 				} else if (e.getSource() == newUnit) {
-					
+					game.buildUnit();
 				}
+				game.repaint();
 			}
 		}
 		
@@ -211,7 +212,7 @@ public class ControlGUI extends JPanel{
 			moveRight.setEnabled(true);
 			moveLeft.setEnabled(true);
 		}
-
+		
 		public void setAllToFalse() {
 			moveUp.setEnabled(false);
 			moveDown.setEnabled(false);

@@ -38,6 +38,7 @@ public class StatusBar extends JPanel {
 		status.update(humanCiv.getStoneCount(), humanCiv.getWoodCount(), humanCiv.getGoldCount(),
 				humanCiv.getFoodCount(), humanCiv.getHappiness());
 		cityPanel.update(humanCiv.getCities());
+		unitPanel.update(humanCiv.getUnits());
 		
 	}
 
@@ -146,7 +147,7 @@ public class StatusBar extends JPanel {
 		public CityPanel(ArrayList<City> cities)
 		{
 			this.cities = cities;
-			cityList = new JTextArea(20, 20);
+			cityList = new JTextArea(20, 25);
 			cityList.setEditable(false);
 			this.setLayout(new GridLayout(0,1));
 			this.add(cityList);
@@ -159,7 +160,7 @@ public class StatusBar extends JPanel {
 			for(City c : cities)
 			{
 				cityList.setText(cityList.getText() + "X: " + Integer.toString(c.getLocation().x + 1) +
-						", Y: " + Integer.toString(c.getLocation().y + 1) + ", Pop = " + Integer.toString(c.getPop()) + 
+						", Y: " + Integer.toString(c.getLocation().y + 1) + ", Pop: " + Integer.toString(c.getPop()) + 
 						", Turns to Grow: " + (c.getTimeToGrow() + 1) + "\n");
 			}// end for
 			this.setBorder(new TitledBorder("Cities:"));
@@ -170,8 +171,12 @@ public class StatusBar extends JPanel {
 	class UnitPanel extends JPanel
 	{
 		public ArrayList<Unit> units;
+		private JTextArea unitList;
 		public UnitPanel(ArrayList<Unit> units)
 		{
+			unitList = new JTextArea(20,25);
+			unitList.setEditable(false);
+			this.add(unitList);
 			this.units = units;
 			this.setLayout(new GridLayout(0,1));
 			update(this.units);
@@ -179,14 +184,13 @@ public class StatusBar extends JPanel {
 		
 		public void update(ArrayList<Unit> units)
 		{
-			this.removeAll();
+			unitList.setText("");
 			for(Unit u : units)
 			{
-				JTextField field = new JTextField("X: " + Integer.toString(u.getLocation().x + 1) +
+				unitList.setText( unitList.getText() + "X: " + Integer.toString(u.getLocation().x + 1) +
 						", Y: " + Integer.toString(u.getLocation().y + 1) + ", Strength: " + 
-						Integer.toString(u.getStrength()) + ", Health: " + Integer.toString(u.getHealth()));
-				field.setEditable(false);
-				this.add(field);
+						Integer.toString(u.getStrength()) + ", Health: " + Integer.toString(u.getHealth()) +
+						", Moves left: " + u.getMoveCount() + "\n");
 			}// end for
 			this.setBorder(new TitledBorder("Units:"));
 			this.setVisible(true);
