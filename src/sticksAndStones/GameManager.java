@@ -40,6 +40,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private StatusBar statusBar;
 	private Point selectedLocation;
 	private int buildPerTurn = 1;
+	private static int buildingsLeft = 1;
 	
 	public GameManager(ControlGUI controlGUI)
 	{
@@ -111,8 +112,13 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return playerCiv;
 	}
 
+	public static int getBuildingsLeft() {
+		return buildingsLeft;
+	}
+
 	public void nextTurn() {
 		turn++;	
+		buildingsLeft = buildPerTurn;
 		playerCiv.update();
 		statusBar.update();
 		this.repaint();
@@ -121,7 +127,15 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	
 	public void buildBuilding(int locX, int locY, Building building)
 	{
-		playerCiv.makeBuilding(locX, locY, building);
+		if (buildingsLeft == 0) {
+			JOptionPane.showMessageDialog(null, "You cannot build any more this turn!");
+			return;
+		}
+		boolean built = playerCiv.makeBuilding(locX, locY, building);
+		if (built) {
+			buildingsLeft--;
+			if (building instanceof City) buildPerTurn++;
+			}
 		statusBar.update(); //update resources
 		this.repaint();
 	}

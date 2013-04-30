@@ -64,8 +64,11 @@ public class Civilization {
 				goldCount -= building.getGoldCost();
 				stoneCount -= building.getStoneCost();
 				woodCount -= building.getWoodCost();
-				if(building instanceof City) 
+				if(building instanceof City) {
+					Point loc = building.getLocation();
 					cities.add((City) building);
+					civLand.add(map[loc.x][loc.y]);
+				}
 				else
 					buildings.add((ImprovementBuilding) building);
 				return true; //if sufficient resources are available, building is possible

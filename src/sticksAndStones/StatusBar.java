@@ -62,8 +62,8 @@ public class StatusBar extends JPanel {
 	
 	class Status extends JPanel
 	{
-		private JLabel stonel, woodl, goldl, foodl, happinessl, turnl;
-		private JTextField stonet, woodt, goldt, foodt, happinesst, turnt;
+		private JLabel stonel, woodl, goldl, foodl, happinessl, turnl, buildl;
+		private JTextField stonet, woodt, goldt, foodt, happinesst, turnt, buildt;
 		public Status (int stone, int wood, int gold, int food, int happiness)
 		{
 			
@@ -73,6 +73,7 @@ public class StatusBar extends JPanel {
 			this.foodl = new JLabel("Food");
 			this.happinessl = new JLabel("Happiness");
 			this.turnl = new JLabel("Turn");
+			this.buildl = new JLabel("Projects left");
 			
 			this.stonet = new JTextField(3);
 			stonet.setText(Integer.toString(stone));
@@ -98,6 +99,10 @@ public class StatusBar extends JPanel {
 			turnt.setText(Integer.toString(GameManager.getTurn()));
 			turnt.setEditable(false);
 			
+			this.buildt = new JTextField(3);
+			buildt.setText(Integer.toString(GameManager.getBuildingsLeft()));
+			buildt.setEditable(false);
+			
 			createGUI();
 		}
 		
@@ -116,6 +121,8 @@ public class StatusBar extends JPanel {
 			this.add(foodt);
 			this.add(happinessl);
 			this.add(happinesst);
+			this.add(buildl);
+			this.add(buildt);
 			this.setBorder(new TitledBorder("Status: "));
 			this.setVisible(true);
 		}
@@ -128,6 +135,7 @@ public class StatusBar extends JPanel {
 			foodt.setText(Integer.toString(food));
 			happinesst.setText(Integer.toString(happiness));
 			turnt.setText(Integer.toString(GameManager.getTurn()));
+			buildt.setText(Integer.toString(GameManager.getBuildingsLeft()));
 		}
 	}// end class
 
