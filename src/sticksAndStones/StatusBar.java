@@ -112,12 +112,12 @@ public class StatusBar extends JPanel {
 			this.setLayout(new GridLayout(0,2));
 			this.add(turnl);
 			this.add(turnt);
-			this.add(goldl);
-			this.add(goldt);
 			this.add(woodl);
 			this.add(woodt);
 			this.add(stonel);
 			this.add(stonet);
+			this.add(goldl);
+			this.add(goldt);
 			this.add(foodl);
 			this.add(foodt);
 			this.add(happinessl);
@@ -184,7 +184,10 @@ public class StatusBar extends JPanel {
 		
 		public void update(ArrayList<Unit> units)
 		{
-			unitList.setText("");
+			Unit yeti = GameManager.getYeti();
+			unitList.setText("YETI!!! X: " + Integer.toString(yeti.getLocation().x + 1) +
+					", Y: " + Integer.toString(yeti.getLocation().y + 1) + ", Strength: " + 
+					Integer.toString(yeti.getStrength()) + ", Health: " + Integer.toString(yeti.getHealth()) + "\n");
 			for(Unit u : units)
 			{
 				unitList.setText( unitList.getText() + "X: " + Integer.toString(u.getLocation().x + 1) +

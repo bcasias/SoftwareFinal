@@ -110,6 +110,10 @@ public class Civilization {
 				}// end switch
 		}// end For
 		for (City c : cities) {
+			foodCount++;
+			woodCount++;
+			stoneCount++;
+			goldCount++;
 			Point loc = c.getLocation();
 			if (map[(int) loc.getX()][(int) loc.getY()].hasResource()) {
 				switch(map[(int) loc.getX()][(int) loc.getY()].getResourceType()) {

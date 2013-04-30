@@ -24,6 +24,7 @@ import buildings.ImprovementBuilding;
 
 import civilization.Civilization;
 import civilization.Unit;
+import civilization.Unit.UnitType;
 
 import land.Land;
 import land.Land.LandType;
@@ -35,7 +36,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private static int turn;
 	private static int boardSizeX = 10;
 	private static int boardSizeY = 10;
-	private Unit yeti;
+	private static Unit yeti;
 	private ControlGUI controlGUI;
 	private StatusBar statusBar;
 	private Point selectedLocation;
@@ -63,7 +64,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 				playerCiv = new Civilization(map, randX, randY);
 			}
 		}
-		
+		placeYeti(playerCiv.getCities().get(0).getLocation());
 		turn = 0;
 		this.addMouseListener(new clickListener());
 		this.addComponentListener(new resizeListener());
@@ -71,6 +72,49 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		// TODO add in monster
 	}
 	
+	private void placeYeti(Point loc) {
+		switch(getQuadrant(loc))
+		{
+		case 0: placeYetiInQuad(3); break;
+		case 1: placeYetiInQuad(2); break;
+		case 2: placeYetiInQuad(1); break;
+		case 3: placeYetiInQuad(0); break;
+		}
+	}
+
+	private void placeYetiInQuad(int quad) {
+		Random rand = new Random();
+		boolean found = false;
+		Point placePoint = new Point(0,0);
+		while (!found)
+		{
+			int x = rand.nextInt(5);
+			int y = rand.nextInt(5);
+			switch(quad)
+			{
+			case 0: placePoint = new Point(x,y); break;
+			case 1:placePoint = new Point(x,y + 5); break;
+			case 2: placePoint = new Point(x + 5,y); break;
+			default: placePoint = new Point(x + 5,y + 5); break;
+			
+			}
+			if(MovementManager.validPoint(placePoint))
+			{
+				yeti = new Unit(placePoint, UnitType.DEMON);
+				found = true;
+			}
+		}
+	}
+
+	private int getQuadrant(Point loc) {
+		int x = (int) loc.getX();
+		int y = (int) loc.getY();
+		if(x < 5 && y < 5) return 0;
+		else if (x < 5) return 1;
+		else if(y < 5) return 2;
+		return 3;
+	}
+
 	public void addStatusBar(StatusBar statusBar) {
 		this.statusBar = statusBar;
 	}
@@ -119,13 +163,38 @@ public class GameManager extends JPanel { // this draws the board to the screen
 
 	public void nextTurn() {
 		turn++;	
+		yetiAttack();
 		buildingsLeft = buildPerTurn;
+		selectedLocation = null;
 		playerCiv.update();
 		statusBar.update();
 		this.repaint();
 		gameEnd();
 	}
 	
+	private void yetiAttack() {
+		int x =(int) yeti.getLocation().getX();
+		int y = (int) yeti.getLocation().getY();
+		Point up = new Point(x -1, y);
+		Point down = new Point(x +1, y);
+		Point left = new Point(x , y - 1);
+		Point right = new Point(x , y + 1);
+		
+		if(playerCiv.hasUnitAt(up))
+		{
+			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(up));
+		} else if(playerCiv.hasUnitAt(down))
+		{
+			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(down));
+		}else if(playerCiv.hasUnitAt(left))
+		{
+			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(left));
+		}else if(playerCiv.hasUnitAt(right))
+		{
+			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(right));
+		}
+	}
+
 	public void buildBuilding(int locX, int locY, Building building)
 	{
 		if (buildingsLeft == 0) {
@@ -169,17 +238,20 @@ public class GameManager extends JPanel { // this draws the board to the screen
 					"\nYou lose!");
 			done = true; //lose on turn 100 if not winning
 		}
-		else if (playerCiv.getLand().size() > 24) {
+		else if (playerCiv.getLand().size() > 9) {
 			JOptionPane.showMessageDialog(null, "You have developed your civilization into a sprawling empire, one that will stand the test of time!" +
 					"\nYou win!");
 			done = true;
 		}
-		else if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125) {
+		else if (playerCiv.getGoldCount() > 100 && playerCiv.getStoneCount() > 100 && playerCiv.getWoodCount() > 100) {
 			JOptionPane.showMessageDialog(null, "Your stockpiles are so plentiful that your civilization is the envy of all..." +
 					"\nYou win!");
 			done = true;
-		}
-		else done = false;
+		} else if (yeti.getHealth() <= 0) {
+			JOptionPane.showMessageDialog(null, "You have slain the fearsome yeti, and saved your civilization from destruction!" +
+					"\nYou win!");
+			done = true;
+		} else done = false;
 		if (done) 
 			System.exit(0);
 		return done;
@@ -260,6 +332,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 				}
 			}
 		}
+		yeti.draw(g, incWidth, incHeight, (int) yeti.getLocation().getX() * incHeight, (int) yeti.getLocation().getY() * incWidth);
 	}
 	
 	public void mapToGrid(int x, int y) {
@@ -358,5 +431,9 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	public void setSelectedLocation(Point position) {
 		selectedLocation = position;
 		
+	}
+
+	public static Unit getYeti() {
+		return yeti;
 	}
 }

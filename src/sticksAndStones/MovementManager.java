@@ -8,19 +8,18 @@ import civilization.Unit;
 
 public class MovementManager {
 	private static GameManager game;
-	private static ArrayList<Civilization> civs = new ArrayList<Civilization>();
+	private static Unit yeti;
+	private static Civilization civ;
 	public MovementManager()
 	{
 
-	}
-	public static void addCiv(Civilization c)
-	{
-		civs.add(c);
 	}
 	
 	public static void  addManager(GameManager g)
 	{
 		game = g;
+		yeti = game.getYeti();
+		civ = game.getPlayerCiv();
 	}
 	
 	// TODO adding can't move on mountains and decrement movement points
@@ -51,18 +50,20 @@ public class MovementManager {
 				return currentLocation;
 		}
 		
-		for(Civilization c : civs)
-		{
-			if(c.hasCityAt(endPoint))
-				return currentLocation;
-			if(c.hasUnitAt(endPoint))
-				return attackUnit(unit, c.getUnitAt(endPoint));
-		} // end for
+
+		if(civ.hasUnitAt(endPoint))
+			endPoint =  currentLocation;
 		
+		if(yeti.isAtLocation(endPoint))
+		{
+			endPoint = attackUnit(unit, yeti);
+		}
+		game.repaint();
+		game.updateStatus();
 		return endPoint;
 	} // end function
 
-	private static boolean validPoint(Point point) {
+	public static boolean validPoint(Point point) {
 		int boardSizeX = GameManager.getBoardSizeX();
 		int boardSizeY = GameManager.getBoardSizeY();
 		
@@ -85,15 +86,7 @@ public class MovementManager {
 		attacker.attack();
 		if(defender.getHealth() <= 0)
 		{
-			for(Civilization c : civs)
-			{
-				if(!(c.getUnitAt(defender.getLocation()) != null))
-				{
-					Point p = defender.getLocation();
-					c.removeUnit(defender);
-					return p;
-				}
-			}
+			civ.removeUnit(defender);
 		} // end if
 		return attacker.getLocation();
 	}

@@ -15,7 +15,7 @@ import sticksAndStones.MovementManager;
 
 public class Unit {
 	private BufferedImage image;
-	private static BufferedImage warriorImage;
+	private static BufferedImage warriorImage, yetiImage;
 	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
 	private char type;
 	private UnitType(char type)
@@ -37,7 +37,8 @@ public class Unit {
 		unitType = type;
 		moveCount = 0;
 		setAttributes();
-		image = warriorImage;
+		if (type == UnitType.DEMON) image = yetiImage;
+		else image = warriorImage;
 	}
 
 	public int getMoveCount()
@@ -47,6 +48,7 @@ public class Unit {
 	public static void initializeImages() {
 		try {
 			warriorImage = ImageIO.read(new File("Textures/Sprite/Warrior.gif"));
+			yetiImage = ImageIO.read(new File("Textures/Sprite/Yeti.png"));
 		} catch (Exception e) {
 			System.out.println("Unit loading has failed.");
 		}

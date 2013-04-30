@@ -32,8 +32,8 @@ public class SticksandStone extends JFrame {
 		this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		JOptionPane.showMessageDialog(null, "Welcome to Sticks and Stones! \nYour objective is to either gather 125 stone, wood, \nand gold or claim 25" +
-				" land before your 100th turn. \nAlternately, you may attempt to kill the fearsome Yeti, but \nmake sure your people do not starve in your" +
+		JOptionPane.showMessageDialog(null, "Welcome to Sticks and Stones! \nYour objective is to either gather 100 stone, wood, \nand gold or build 10" +
+				" cities before your 100th turn. \nAlternately, you may attempt to kill the fearsome Yeti, but \nmake sure your people do not starve in your" +
 				" quest to \nsave the world and ensure a lasting peace for your people!");
 	}
 }

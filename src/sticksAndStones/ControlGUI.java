@@ -73,12 +73,12 @@ public class ControlGUI extends JPanel{
 		
 		public BuildingPanel()
 		{
-			newCity 		= new JButton("Make City");
-			newBarrack 		= new JButton("Make Barrack");
-			newFarm 		= new JButton("Make Farm");
-			newMine 		= new JButton("Make Mine");
-			newSawmill 		= new JButton("Make Sawmill");
-			newTradingPost 	= new JButton("Make Trading Post");
+			newCity 		= new JButton("Make City (5, 5, 5)");
+			newBarrack 		= new JButton("Make Barrack (2, 3, 1)");
+			newFarm 		= new JButton("Make Farm (1, 1, 0)");
+			newMine 		= new JButton("Make Mine (2, 0, 0)");
+			newSawmill 		= new JButton("Make Sawmill (1, 0, 1)");
+			newTradingPost 	= new JButton("Make Trading Post (1, 2, 3)");
 			
 			newCity.addActionListener(new ButtonListener());
 			newBarrack.addActionListener(new ButtonListener());
