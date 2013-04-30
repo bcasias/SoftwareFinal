@@ -73,12 +73,12 @@ public class ControlGUI extends JPanel{
 		
 		public BuildingPanel()
 		{
-			newCity 		= new JButton("Make City (5, 5, 5)");
+			newCity 		= new JButton("Make City (8, 8, 8)");
 			newBarrack 		= new JButton("Make Barrack (2, 3, 1)");
 			newFarm 		= new JButton("Make Farm (1, 1, 0)");
-			newMine 		= new JButton("Make Mine (2, 0, 0)");
-			newSawmill 		= new JButton("Make Sawmill (1, 0, 1)");
-			newTradingPost 	= new JButton("Make Trading Post (1, 2, 3)");
+			newMine 		= new JButton("Make Mine (4, 4, 0)");
+			newSawmill 		= new JButton("Make Sawmill (3, 0, 2)");
+			newTradingPost 	= new JButton("Make Trading Post (4, 4, 3)");
 			
 			newCity.addActionListener(new ButtonListener());
 			newBarrack.addActionListener(new ButtonListener());
@@ -145,13 +145,13 @@ public class ControlGUI extends JPanel{
 							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.FARM, 1, 1, 0));
 				} else if (e.getSource() == newMine) {
 					game.buildBuilding((int) location.getX(), (int) location.getY(), 
-							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.MINE, 2, 0, 0));
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.MINE, 4, 4, 0));
 				} else if (e.getSource() == newSawmill) {
 					game.buildBuilding((int) location.getX(), (int) location.getY(), 
-							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.SAWMILL, 1, 0, 1));
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.SAWMILL, 3, 0, 2));
 				} else {
 					game.buildBuilding((int) location.getX(), (int) location.getY(), 
-							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.TRADINGPOST, 1, 2, 3));
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.TRADINGPOST, 4, 4, 3));
 				}
 			}
 		}

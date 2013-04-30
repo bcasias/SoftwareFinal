@@ -88,6 +88,7 @@ public class MovementManager {
 		{
 			civ.removeUnit(defender);
 		} // end if
+		GameManager.gameEnd();
 		return attacker.getLocation();
 	}
 }

@@ -129,7 +129,7 @@ public class Civilization {
 	private void consumeResources() {
 		for(City c : cities)
 		{
-			foodCount -= c.getPop()/2;
+			foodCount -= c.getPop();
 		}
 		foodCount -= units.size();
 		// change happiness

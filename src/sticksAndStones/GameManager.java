@@ -32,7 +32,7 @@ import land.Land.LandType;
 
 public class GameManager extends JPanel { // this draws the board to the screen
 	private static Land[][] map;
-	private Civilization playerCiv;
+	private static Civilization playerCiv;
 	private static int turn;
 	private static int boardSizeX = 10;
 	private static int boardSizeY = 10;
@@ -207,6 +207,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			if (building instanceof City) buildPerTurn++;
 			}
 		statusBar.update(); //update resources
+		controlGUI.setAllToFalse();
 		this.repaint();
 	}
 	
@@ -226,7 +227,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return turn;
 	}
 
-	public boolean gameEnd() {
+	public static boolean gameEnd() {
 		boolean done = false;
 		if (playerCiv.getHappiness() == 0) {
 			JOptionPane.showMessageDialog(null, "Your people have starved and destroyed your civilization in a series of riots..." +

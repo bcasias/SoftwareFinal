@@ -26,7 +26,7 @@ public class City extends Building {
 	private int pop;
 
 	public City(int x, int y) { 
-		super(x, y, 5, 5, 5);
+		super(x, y, 8, 8, 8);
 		timeToGrow = 4;
 		cityType = CityType.VILLAGE;
 		landOwned = new ArrayList<Integer>();
