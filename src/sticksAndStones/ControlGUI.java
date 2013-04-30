@@ -135,7 +135,6 @@ public class ControlGUI extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Point location = game.getSelectedLocation();
-				System.out.println(location);
 				if (e.getSource() == newCity) {
 					game.buildBuilding((int) location.getX(), (int) location.getY(), new City((int) location.getX(), (int) location.getY()));
 				} else if (e.getSource() == newBarrack) {

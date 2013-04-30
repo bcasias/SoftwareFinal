@@ -14,6 +14,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import resource.Resource.ResourceType;
 
 import buildings.Building;
@@ -37,6 +39,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private ControlGUI controlGUI;
 	private StatusBar statusBar;
 	private Point selectedLocation;
+	private int buildPerTurn = 1;
 	
 	public GameManager(ControlGUI controlGUI)
 	{
@@ -107,11 +110,12 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	public Civilization getPlayerCiv() {
 		return playerCiv;
 	}
-	
+
 	public void nextTurn() {
 		turn++;	
 		playerCiv.update();
 		statusBar.update();
+		this.repaint();
 		gameEnd();
 	}
 	
@@ -131,27 +135,31 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 
 	public boolean gameEnd() {
+		boolean done = false;
 		if (playerCiv.getHappiness() == 0) {
 			JOptionPane.showMessageDialog(null, "Your people have starved and destroyed your civilization in a series of riots..." +
 					"\nYou lose!");
-			return true; //lose if happiness reaches 0
+			done = true; //lose if happiness reaches 0
 		}
-		if (turn == 100) {
+		else if (turn == 100) {
 			JOptionPane.showMessageDialog(null, "You have taken too long to develop, and the fierce Yeti has destroyed your civilization!" +
 					"\nYou lose!");
-			return true; //lose on turn 100 if not winning
+			done = true; //lose on turn 100 if not winning
 		}
-		if (playerCiv.getLand().size() > 24) {
+		else if (playerCiv.getLand().size() > 24) {
 			JOptionPane.showMessageDialog(null, "You have developed your civilization into a sprawling empire, one that will stand the test of time!" +
 					"\nYou win!");
-			return true;
+			done = true;
 		}
-		if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125) {
+		else if (playerCiv.getGoldCount() > 125 && playerCiv.getStoneCount() > 125 && playerCiv.getWoodCount() > 125) {
 			JOptionPane.showMessageDialog(null, "Your stockpiles are so plentiful that your civilization is the envy of all..." +
 					"\nYou win!");
-			return true;
+			done = true;
 		}
-		return false;
+		else done = false;
+		if (done) 
+			System.exit(0);
+		return done;
 	}
 	
 	public static Land getLandAt(Point point)

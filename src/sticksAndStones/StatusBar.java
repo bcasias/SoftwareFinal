@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -36,6 +37,7 @@ public class StatusBar extends JPanel {
 	{
 		status.update(humanCiv.getStoneCount(), humanCiv.getWoodCount(), humanCiv.getGoldCount(),
 				humanCiv.getFoodCount(), humanCiv.getHappiness());
+		cityPanel.update(humanCiv.getCities());
 		
 	}
 
@@ -132,23 +134,25 @@ public class StatusBar extends JPanel {
 	class CityPanel extends JPanel
 	{
 		public ArrayList<City> cities;
+		private JTextArea cityList;
 		public CityPanel(ArrayList<City> cities)
 		{
 			this.cities = cities;
+			cityList = new JTextArea(20, 20);
+			cityList.setEditable(false);
 			this.setLayout(new GridLayout(0,1));
+			this.add(cityList);
 			update(this.cities);
 		}
 		
 		public void update(ArrayList<City> cities)
 		{
-			this.removeAll();
+			cityList.setText("");
 			for(City c : cities)
 			{
-				JTextField field = new JTextField("X: " + Integer.toString(c.getLocation().x + 1) +
-						", Y: " + Integer.toString(c.getLocation().y + 1) + ", Pop: " + 
-						Integer.toString(c.getPop()));
-				field.setEditable(false);
-				this.add(field);
+				cityList.setText(cityList.getText() + "X: " + Integer.toString(c.getLocation().x + 1) +
+						", Y: " + Integer.toString(c.getLocation().y + 1) + ", Pop = " + Integer.toString(c.getPop()) + 
+						", Turns to Grow: " + (c.getTimeToGrow() + 1) + "\n");
 			}// end for
 			this.setBorder(new TitledBorder("Cities:"));
 			this.setVisible(true);

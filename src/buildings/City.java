@@ -22,12 +22,12 @@ public class City extends Building {
 	}
 	CityType cityType;
 	private ArrayList<Integer> landOwned;
-	private int growPopulation;
+	private int timeToGrow;
 	private int pop;
 
 	public City(int x, int y) { 
 		super(x, y, 5, 5, 5);
-		growPopulation = 5;
+		timeToGrow = 4;
 		cityType = CityType.VILLAGE;
 		landOwned = new ArrayList<Integer>();
 		pop = 1;
@@ -38,22 +38,22 @@ public class City extends Building {
 
 	public void update()
 	{
-		if(growPopulation <= 0)
+		if(timeToGrow <= 0)
 		{
-			growPopulation = 5;
+			timeToGrow = 4;
 			pop++;
 		}
 		else
 		{
-			growPopulation--;
+			timeToGrow--;
 		}
 
-		if(pop >= 5 && pop < 10)
+		if(pop >= 5 && pop < 10 && cityType != CityType.TOWN)
 		{
 			cityType = CityType.TOWN;
 			image = townImage;
 		}
-		else if (pop >= 10)
+		else if (pop >= 10 && cityType != CityType.CITY)
 		{
 			cityType = CityType.CITY;
 			image = cityImage;
@@ -66,6 +66,10 @@ public class City extends Building {
 
 	public int getPop() {
 		return pop;
+	}
+
+	public int getTimeToGrow() {
+		return timeToGrow;
 	}
 
 	public boolean isLocatedAt(Point loc)

@@ -50,6 +50,7 @@ public class Civilization {
 	{
 		gatherResources();
 		consumeResources();
+		for (City c : cities) c.update();
 		for(Unit u : units)
 		{
 			u.update();
@@ -63,10 +64,10 @@ public class Civilization {
 				goldCount -= building.getGoldCost();
 				stoneCount -= building.getStoneCost();
 				woodCount -= building.getWoodCost();
-				if(building instanceof City)
-					cities.add((City)building);
+				if(building instanceof City) 
+					cities.add((City) building);
 				else
-					buildings.add((ImprovementBuilding)building);
+					buildings.add((ImprovementBuilding) building);
 				return true; //if sufficient resources are available, building is possible
 			} 
 			else 
@@ -105,12 +106,23 @@ public class Civilization {
 				case TRADINGPOST: goldCount++; break;
 				}// end switch
 		}// end For
+		for (City c : cities) {
+			Point loc = c.getLocation();
+			if (map[(int) loc.getX()][(int) loc.getY()].hasResource()) {
+				switch(map[(int) loc.getX()][(int) loc.getY()].getResourceType()) {
+				case FOOD: foodCount++; break;
+				case WOOD: woodCount++; break;
+				case STONE: stoneCount++; break;
+				case GOLD: goldCount++; break;
+				}
+			}
+		}
 	} // end function
 	
 	private void consumeResources() {
 		for(City c : cities)
 		{
-			foodCount -= c.getPop();
+			foodCount -= c.getPop()/2;
 		}
 		foodCount -= units.size();
 		// change happiness
