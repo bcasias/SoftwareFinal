@@ -11,6 +11,10 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import buildings.City;
+import buildings.ImprovementBuilding;
+import buildings.ImprovementBuilding.BuildingType;
+
 import civilization.Civilization;
 
 public class ControlGUI extends JPanel{
@@ -35,6 +39,7 @@ public class ControlGUI extends JPanel{
 		this.add(movePanel, BorderLayout.EAST);
 		this.add(nextTurn, BorderLayout.WEST);
 		this.setVisible(true);
+		setAllToFalse();
 	}
 	
 	public void addManager(GameManager g)
@@ -77,6 +82,12 @@ public class ControlGUI extends JPanel{
 			newSawmill 		= new JButton("Make Sawmill");
 			newTradingPost 	= new JButton("Make Trading Post");
 			
+			newCity.addActionListener(new ButtonListener());
+			newBarrack.addActionListener(new ButtonListener());
+			newFarm.addActionListener(new ButtonListener());
+			newMine.addActionListener(new ButtonListener());
+			newSawmill.addActionListener(new ButtonListener());
+			newTradingPost.addActionListener(new ButtonListener());
 			this.setLayout(new GridLayout(2,0));
 			
 			this.add(newCity);
@@ -106,6 +117,32 @@ public class ControlGUI extends JPanel{
 			newTradingPost.setEnabled(false);
 		}
 		
+		public class ButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point location = game.getSelectedLocation();
+				System.out.println(location);
+				if (e.getSource() == newCity) {
+					game.buildBuilding((int) location.getX(), (int) location.getY(), new City((int) location.getX(), (int) location.getY()));
+				} else if (e.getSource() == newBarrack) {
+					game.buildBuilding((int) location.getX(), (int) location.getY(), 
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.BARRACK, 2, 3, 1));
+				} else if (e.getSource() == newFarm) {
+					game.buildBuilding((int) location.getX(), (int) location.getY(), 
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.FARM, 1, 1, 0));
+				} else if (e.getSource() == newMine) {
+					game.buildBuilding((int) location.getX(), (int) location.getY(), 
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.MINE, 2, 0, 0));
+				} else if (e.getSource() == newSawmill) {
+					game.buildBuilding((int) location.getX(), (int) location.getY(), 
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.SAWMILL, 1, 0, 1));
+				} else {
+					game.buildBuilding((int) location.getX(), (int) location.getY(), 
+							new ImprovementBuilding((int) location.getX(), (int) location.getY(), BuildingType.TRADINGPOST, 1, 2, 3));
+				}
+			}
+		}
 	}
 	
 	class MovePanel extends JPanel
@@ -130,6 +167,11 @@ public class ControlGUI extends JPanel{
 			this.setVisible(true);
 		}
 
+		public class ButtonListener implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		}
 		public void showMakeUnit() {
 			newUnit.setEnabled(true);
 		}

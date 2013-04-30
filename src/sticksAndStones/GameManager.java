@@ -117,6 +117,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	{
 		playerCiv.makeBuilding(locX, locY, building);
 		statusBar.update(); //update resources
+		this.repaint();
 	}
 
 	public static void forceTurn(int i) {
@@ -266,6 +267,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		selectedLocation = p;
 	}
 	
+	public Point getSelectedLocation() {
+		return selectedLocation;
+	}
+
 	class clickListener implements MouseListener
 	{
 		@Override

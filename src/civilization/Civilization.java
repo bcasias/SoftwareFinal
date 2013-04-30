@@ -4,6 +4,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
+import resource.Resource.ResourceType;
+
 import buildings.Building;
 import buildings.City;
 import buildings.ImprovementBuilding;
@@ -54,7 +58,7 @@ public class Civilization {
 
 	public boolean makeBuilding(int locx, int locy, Building building) {
 		Point landLoc = new Point(locx, locy);
-		if(civLand.contains(landLoc))
+		//if(civLand.contains(landLoc))
 			if (goldCount >= building.getGoldCost() && stoneCount >= building.getStoneCost() && woodCount >= building.getWoodCost()) {
 				goldCount -= building.getGoldCost();
 				stoneCount -= building.getStoneCost();
@@ -67,9 +71,10 @@ public class Civilization {
 			} 
 			else 
 			{
+				JOptionPane.showMessageDialog(null, "You do not have resources to build this"  + "!");
 				return false;
 			}
-		return false;
+		//return false;
 	}
 
 	public void gatherResources()
@@ -88,16 +93,17 @@ public class Civilization {
 		
 		for(ImprovementBuilding i : buildings)
 		{
-			if(i.hasResource()) {
 				switch(i.getBuildingType()) // FARM, BARRACK, MINE, SAWMILL, TRADINGPOST
 				{
-				case FARM : foodCount++;
-				case BARRACK:
-				case MINE:
-				case SAWMILL:
-				case TRADINGPOST:
+				case FARM : foodCount++; break;
+				case BARRACK: break;
+				case MINE: if (map[(int) i.getLocation().getX()][(int) i.getLocation().getY()].getResourceType() == ResourceType.GOLD) 
+					goldCount++;
+				else stoneCount++;
+				break;
+				case SAWMILL: woodCount++; break;
+				case TRADINGPOST: goldCount++; break;
 				}// end switch
-			}// end if
 		}// end For
 	} // end function
 	

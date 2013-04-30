@@ -23,10 +23,6 @@ public class ImprovementBuilding extends Building {
 		}
 	}
 
-	public boolean hasResource()
-	{
-		return (buildingType == BuildingType.NONE) ? true: false;
-	}
 	public BuildingType getBuildingType()
 	{
 		return buildingType;
