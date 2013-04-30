@@ -1,11 +1,7 @@
 package buildings;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 public class City extends Building { //city class
 	public enum CityType {

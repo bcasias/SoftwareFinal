@@ -1,20 +1,16 @@
 package sticksAndStones;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import resource.Resource.ResourceType;
 
@@ -43,7 +39,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	private Point selectedLocation;
 	private int buildPerTurn = 1;
 	private static int buildingsLeft = 1;
-	
+
 	public GameManager(ControlGUI controlGUI)
 	{
 		MapGeneration g = new MapGeneration();
@@ -72,7 +68,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		this.repaint();
 		// TODO add in monster
 	}
-	
+
 	private void placeYeti(Point loc) { //picks a yeti location diagonal from the city
 		switch(getQuadrant(loc))
 		{
@@ -89,15 +85,15 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		Point placePoint = new Point(0,0);
 		while (!found)
 		{
-			int x = rand.nextInt(5);
-			int y = rand.nextInt(5);
+			int x = rand.nextInt(boardSizeX/2);
+			int y = rand.nextInt(boardSizeY/2);
 			switch(quad)
 			{
 			case 0: placePoint = new Point(x,y); break;
-			case 1:placePoint = new Point(x,y + 5); break;
-			case 2: placePoint = new Point(x + 5,y); break;
-			default: placePoint = new Point(x + 5,y + 5); break;
-			
+			case 1:placePoint = new Point(x, y + boardSizeY/2); break;
+			case 2: placePoint = new Point(x + boardSizeX/2, y); break;
+			default: placePoint = new Point(x + boardSizeX/2, y + boardSizeY/2); break;
+
 			}
 			if(MovementManager.validPoint(placePoint))
 			{
@@ -108,18 +104,19 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 
 	private int getQuadrant(Point loc) { //gets the quadrant of the point
+		//0 = NW, 1 = NE, 2 = SW, 3 = SE
 		int x = (int) loc.getX();
 		int y = (int) loc.getY();
-		if(x < 5 && y < 5) return 0;
-		else if (x < 5) return 1;
-		else if(y < 5) return 2;
+		if(x < boardSizeX/2 && y < boardSizeY/2) return 0;
+		else if (x < boardSizeX/2) return 1;
+		else if(y < boardSizeY/2) return 2;
 		return 3;
 	}
 
 	public void addStatusBar(StatusBar statusBar) {
 		this.statusBar = statusBar;
 	}
-	
+
 	public StatusBar getStatusBar() {
 		return statusBar;
 	}
@@ -131,32 +128,32 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	public class resizeListener extends ComponentAdapter {
 		public void componentResized(ComponentEvent e) {} //empty function forces size to update properly
 	}
-	
+
 	public static int calculateIndex(int x, int y) {
 		return x * boardSizeY + y; 
 	}
-	
+
 	public static Point calcReverseIndex(int index) {
 		int x = index / boardSizeY;
 		int y = index % boardSizeY;
 		return new Point(x, y);
 	}
-	
+
 	public static int getBoardSizeX() {
 		return boardSizeX;		
 	}
-	
+
 	public static int getBoardSizeY() {
 		return boardSizeY;
 	}
-		
+
 	/* All of these functions are for testing */
-	
+
 	public Land[][] getMap()
 	{
 		return map;
 	}
-	
+
 	public Land getSquare(int index) { //gets the land square at an index
 		Point p = sticksAndStones.GameManager.calcReverseIndex(index);
 		return map[p.x][p.y];
@@ -180,7 +177,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		this.repaint();
 		gameEnd();
 	}
-	
+
 	private void yetiAttack() { //yeti checks adjacent targets to attack
 		int x =(int) yeti.getLocation().getX();
 		int y = (int) yeti.getLocation().getY();
@@ -188,7 +185,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		Point down = new Point(x +1, y);
 		Point left = new Point(x , y - 1);
 		Point right = new Point(x , y + 1);
-		
+
 		if(playerCiv.hasUnitAt(up))
 		{
 			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(up));
@@ -218,12 +215,12 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		if (built) {
 			buildingsLeft--;
 			if (building instanceof City) buildPerTurn++;
-			}
+		}
 		statusBar.update(); //update resources
 		controlGUI.setAllToFalse();
 		this.repaint();
 	}
-	
+
 	public void buildUnit() //builds a unit at the location
 	{
 		playerCiv.makeUnit(selectedLocation);
@@ -246,31 +243,27 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			JOptionPane.showMessageDialog(null, "Your people have starved and destroyed your civilization in a series of riots..." +
 					"\nYou lose!");
 			done = true; //lose if happiness reaches 0
-		}
-		else if (turn == 100) {
+		} else if (turn == 100) {
 			JOptionPane.showMessageDialog(null, "You have taken too long to develop, and the fierce Yeti has destroyed your civilization!" +
 					"\nYou lose!");
 			done = true; //lose on turn 100 if not winning
-		}
-		else if (playerCiv.getLand().size() > 9) {
+		} else if (playerCiv.getLand().size() > 9) {
 			JOptionPane.showMessageDialog(null, "You have developed your civilization into a sprawling empire, one that will stand the test of time!" +
 					"\nYou win!");
-			done = true;
-		}
-		else if (playerCiv.getGoldCount() > 200 && playerCiv.getStoneCount() > 200 && playerCiv.getWoodCount() > 200) {
+			done = true; //win if 10 cities built
+		} else if (playerCiv.getGoldCount() > 200 && playerCiv.getStoneCount() > 200 && playerCiv.getWoodCount() > 200) {
 			JOptionPane.showMessageDialog(null, "Your stockpiles are so plentiful that your civilization is the envy of all..." +
 					"\nYou win!");
-			done = true;
+			done = true; //win by gathering resources
 		} else if (yeti.getHealth() <= 0) {
 			JOptionPane.showMessageDialog(null, "You have slain the fearsome Yeti, and saved your civilization from destruction!" +
 					"\nYou win!");
-			done = true;
+			done = true; //win if yeti is killed
 		} else done = false;
-		if (done) 
-			System.exit(0);
+		if (done) System.exit(0); //close game if ended
 		return done;
 	}
-	
+
 	public static Land getLandAt(Point point)
 	{
 		return map[point.x][point.y];
@@ -281,7 +274,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	// format "<landType>,<City>, <Unit> "
 	{
 		String[][] architect = new String[boardSizeX][boardSizeY];
-		
+
 		for(int i = 0; i < boardSizeX; i++)
 		{
 			for(int j = 0; j < boardSizeY; j++)
@@ -308,10 +301,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 				}// end if
 			} // end for j
 		}// end for i
-		
+
 		return architect;
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) { //paint the board
 		super.paintComponent(g);
@@ -348,7 +341,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		}
 		yeti.draw(g, incWidth, incHeight, (int) yeti.getLocation().getX() * incHeight, (int) yeti.getLocation().getY() * incWidth);
 	}
-	
+
 	public void mapToGrid(int x, int y) { //maps where the player has clicked
 		int incWidth = getWidth()/boardSizeY;
 		int incHeight = getHeight()/boardSizeX;
@@ -365,24 +358,23 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		// producing material
 		if(playerCiv.hasCityAt(selectedLocation))
 		{
-			if(playerCiv.hasUnitAt(selectedLocation))
+			if(playerCiv.hasUnitAt(selectedLocation) && playerCiv.getUnitAt(selectedLocation).getMoveCount() > 0)
 			{
 				controlGUI.makeMoveControlTrue();
 			}
-			else
+			else if (!playerCiv.hasUnitAt(selectedLocation))
 			{
 				controlGUI.showMakeUnitButton();
 			}
-			
+
 		}
 		else
 		{
-			if(playerCiv.hasImprovementBuildingAt(selectedLocation)) {
-				if (playerCiv.getImprovementBuildingAt(selectedLocation).getBuildingType() == BuildingType.BARRACK
-						&& !playerCiv.hasUnitAt(selectedLocation)) 
-					controlGUI.showMakeUnitButton();
-			}
-			if(playerCiv.hasUnitAt(selectedLocation))
+			if (playerCiv.hasImprovementBuildingAt(selectedLocation) && 
+					playerCiv.getImprovementBuildingAt(selectedLocation).getBuildingType() == BuildingType.BARRACK
+					&& !playerCiv.hasUnitAt(selectedLocation)) 
+				controlGUI.showMakeUnitButton();
+			if(playerCiv.hasUnitAt(selectedLocation) && playerCiv.getUnitAt(selectedLocation).getMoveCount() > 0)
 			{
 				controlGUI.makeMoveControlTrue();
 			}
@@ -405,7 +397,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	public void setHighlightedCell(Point p) {
 		selectedLocation = p;
 	}
-	
+
 	public Point getSelectedLocation() {
 		return selectedLocation;
 	}
@@ -419,37 +411,37 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			mapToGrid(e.getX(), e.getY());
 			updateControlGUI();
-			
+
 		}
 	}
 
 	public void updateStatus() {
 		statusBar.update();
-		
+
 	}
 
 	public void setSelectedLocation(Point position) {
 		selectedLocation = position;
-		
+
 	}
 
 	public static Unit getYeti() {

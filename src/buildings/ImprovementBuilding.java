@@ -1,11 +1,6 @@
 package buildings;
 
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class ImprovementBuilding extends Building { //has all improvements
 	public enum BuildingType {FARM, BARRACK, MINE, SAWMILL, TRADINGPOST, NONE}
@@ -21,6 +16,7 @@ public class ImprovementBuilding extends Building { //has all improvements
 		case MINE:			image = mineImage; break;
 		case SAWMILL:		image = sawMillImage; break;
 		case TRADINGPOST:	image = tradingPostImage; break;
+		default: 			image = null; break;
 		}
 	}
 

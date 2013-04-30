@@ -4,9 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 import sticksAndStones.Direction;
@@ -101,6 +98,7 @@ public class Unit { //fighting units
 		case HILL:
 			moveCount -= 2;
 			break;
+		default: break;
 		} 
 		game.updateStatus();
 		game.repaint();
@@ -138,6 +136,6 @@ public class Unit { //fighting units
 	}
 	
 	public void draw(Graphics g, int sizeX, int sizeY, int locX, int locY) {
-		g.drawImage(image, locY + sizeX/4, locX + sizeY/4, sizeX/2, sizeY/2, null);
+		g.drawImage(image, locY + sizeX*3/16, locX + sizeY*3/16, sizeX*5/8, sizeY*5/8, null);
 	}
 }

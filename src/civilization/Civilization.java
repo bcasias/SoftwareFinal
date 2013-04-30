@@ -2,8 +2,6 @@ package civilization;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Set;
-
 import javax.swing.JOptionPane;
 
 import resource.Resource.ResourceType;
@@ -16,7 +14,6 @@ import buildings.ImprovementBuilding.BuildingType;
 import civilization.Unit.UnitType;
 
 import land.Land;
-import land.Land.LandType;
 
 public class Civilization { //contains all of the methods for the player's civ
 	private ArrayList<City> cities;
@@ -59,7 +56,6 @@ public class Civilization { //contains all of the methods for the player's civ
 	}
 
 	public boolean makeBuilding(int locx, int locy, Building building) { //makes a building for the civ
-		Point landLoc = new Point(locx, locy);
 		//if(civLand.contains(landLoc))
 			if (goldCount >= building.getGoldCost() && stoneCount >= building.getStoneCost() && woodCount >= building.getWoodCost()) {
 				goldCount -= building.getGoldCost();
@@ -92,6 +88,7 @@ public class Civilization { //contains all of the methods for the player's civ
 			case PLAIN: foodCount++; break;
 			case FOREST:woodCount++; break;
 			case HILL:  stoneCount++; break;
+			default: break;
 			}
 			if (l.hasRiver()) foodCount++;
 		}// end for
@@ -108,6 +105,7 @@ public class Civilization { //contains all of the methods for the player's civ
 				break;
 				case SAWMILL: woodCount++; break;
 				case TRADINGPOST: goldCount++; break;
+				default: break;
 				}// end switch
 		}// end For
 		for (City c : cities) {
@@ -122,6 +120,7 @@ public class Civilization { //contains all of the methods for the player's civ
 				case WOOD: woodCount++; break;
 				case STONE: stoneCount++; break;
 				case GOLD: goldCount++; break;
+				default: break;
 				}
 			}
 		}
