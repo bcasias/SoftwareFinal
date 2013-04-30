@@ -17,7 +17,7 @@ import civilization.Unit.UnitType;
 import land.Land;
 import land.Land.LandType;
 
-public class Civilization {
+public class Civilization { //contains all of the methods for the player's civ
 	private ArrayList<City> cities;
 	private Land[][] map;
 	private ArrayList<ImprovementBuilding> buildings;
@@ -46,7 +46,7 @@ public class Civilization {
 		cities.add(new City(CityLocX, CityLocY));
 	}
 	
-	public void update()
+	public void update() //runs on next turn, gathers/consumes resources and updates gui
 	{
 		gatherResources();
 		consumeResources();
@@ -57,7 +57,7 @@ public class Civilization {
 		}
 	}
 
-	public boolean makeBuilding(int locx, int locy, Building building) {
+	public boolean makeBuilding(int locx, int locy, Building building) { //makes a building for the civ
 		Point landLoc = new Point(locx, locy);
 		//if(civLand.contains(landLoc))
 			if (goldCount >= building.getGoldCost() && stoneCount >= building.getStoneCost() && woodCount >= building.getWoodCost()) {
@@ -81,7 +81,7 @@ public class Civilization {
 		//return false;
 	}
 
-	public void gatherResources()
+	public void gatherResources() //gathers resources from the board
 	{
 		if(civLand.size() > 0)
 		for(Land l : civLand)
@@ -126,7 +126,7 @@ public class Civilization {
 		}
 	} // end function
 	
-	private void consumeResources() {
+	private void consumeResources() { //eats food from pop/units
 		for(City c : cities)
 		{
 			foodCount -= c.getPop();
@@ -156,7 +156,7 @@ public class Civilization {
 			happiness = i;
 	}
 
-	public boolean addLand(int locX, int locY)
+	public boolean addLand(int locX, int locY) //adds a land to the civ
 	{
 		Point north = new Point(locX, locY -1);
 		Point east = new Point(locX + 1, locY);
@@ -171,7 +171,7 @@ public class Civilization {
 		return false;
 	}
 	
-	public boolean makeUnit(Point selectedLocation)
+	public boolean makeUnit(Point selectedLocation) //makes a unit for the civ
 	{
 		// Units cost Gold
 		if(goldCount < 5)

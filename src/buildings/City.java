@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-public class City extends Building {
+public class City extends Building { //city class
 	public enum CityType {
 		VILLAGE('V'), TOWN('T'), CITY('C');
 		private char type;
@@ -36,7 +36,7 @@ public class City extends Building {
 		image = villageImage;
 	}
 
-	public void update()
+	public void update() //finds if city should grow population/type
 	{
 		if(timeToGrow <= 0)
 		{

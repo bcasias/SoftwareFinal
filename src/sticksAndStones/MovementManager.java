@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import civilization.Civilization;
 import civilization.Unit;
 
-public class MovementManager {
+public class MovementManager { //movement logic, static class
 	private static GameManager game;
 	private static Unit yeti;
 	private static Civilization civ;
@@ -22,8 +22,7 @@ public class MovementManager {
 		civ = game.getPlayerCiv();
 	}
 	
-	// TODO adding can't move on mountains and decrement movement points
-	public static Point moveTo(Unit unit, Direction direction)
+	public static Point moveTo(Unit unit, Direction direction) //method to move in a direction
 	{
 		Point currentLocation = unit.getLocation();
 		if(unit.getMovementPoints() <= 0) return currentLocation;
@@ -63,7 +62,7 @@ public class MovementManager {
 		return endPoint;
 	} // end function
 
-	public static boolean validPoint(Point point) {
+	public static boolean validPoint(Point point) { //finds if the point can be moved to (valid terrain, in board)
 		int boardSizeX = GameManager.getBoardSizeX();
 		int boardSizeY = GameManager.getBoardSizeY();
 		
@@ -80,7 +79,7 @@ public class MovementManager {
 		return true;
 	}
 	
-	public static Point attackUnit(Unit attacker, Unit defender)
+	public static Point attackUnit(Unit attacker, Unit defender) //attacks a unit
 	{
 		defender.takeDamage(attacker.getStrength());
 		attacker.attack();

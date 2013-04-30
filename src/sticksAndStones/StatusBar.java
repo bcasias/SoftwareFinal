@@ -14,7 +14,7 @@ import buildings.City;
 import civilization.Civilization;
 import civilization.Unit;
 
-public class StatusBar extends JPanel {
+public class StatusBar extends JPanel { //shows all of the civ data
 	private Civilization humanCiv;
 	private String civName;
 	private Status status;

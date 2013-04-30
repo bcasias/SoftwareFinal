@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ImprovementBuilding extends Building {
+public class ImprovementBuilding extends Building { //has all improvements
 	public enum BuildingType {FARM, BARRACK, MINE, SAWMILL, TRADINGPOST, NONE}
 	private BuildingType buildingType;
 	public ImprovementBuilding(int locx, int locy, BuildingType buildingType, int wood, int stone, int gold) {

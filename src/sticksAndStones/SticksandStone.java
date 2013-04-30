@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import sticksAndStones.GameManager;
 import sticksAndStones.ControlGUI;
 
-public class SticksandStone extends JFrame {
+public class SticksandStone extends JFrame { //frame that controls the overall game screen
 	private GameManager gameManager;
 	private ControlGUI controlGUI;
 	private StatusBar statusBar;

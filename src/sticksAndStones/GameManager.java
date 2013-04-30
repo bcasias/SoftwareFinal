@@ -72,7 +72,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		// TODO add in monster
 	}
 	
-	private void placeYeti(Point loc) {
+	private void placeYeti(Point loc) { //picks a yeti location diagonal from the city
 		switch(getQuadrant(loc))
 		{
 		case 0: placeYetiInQuad(3); break;
@@ -82,7 +82,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		}
 	}
 
-	private void placeYetiInQuad(int quad) {
+	private void placeYetiInQuad(int quad) { //places the yeti
 		Random rand = new Random();
 		boolean found = false;
 		Point placePoint = new Point(0,0);
@@ -106,7 +106,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		}
 	}
 
-	private int getQuadrant(Point loc) {
+	private int getQuadrant(Point loc) { //gets the quadrant of the point
 		int x = (int) loc.getX();
 		int y = (int) loc.getY();
 		if(x < 5 && y < 5) return 0;
@@ -156,7 +156,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return map;
 	}
 	
-	public Land getSquare(int index) {
+	public Land getSquare(int index) { //gets the land square at an index
 		Point p = sticksAndStones.GameManager.calcReverseIndex(index);
 		return map[p.x][p.y];
 	}
@@ -169,7 +169,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return buildingsLeft;
 	}
 
-	public void nextTurn() {
+	public void nextTurn() { //activates on the next turn button
 		turn++;	
 		yetiAttack();
 		buildingsLeft = buildPerTurn;
@@ -180,7 +180,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		gameEnd();
 	}
 	
-	private void yetiAttack() {
+	private void yetiAttack() { //yeti checks adjacent targets to attack
 		int x =(int) yeti.getLocation().getX();
 		int y = (int) yeti.getLocation().getY();
 		Point up = new Point(x -1, y);
@@ -203,7 +203,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		}
 	}
 
-	public void buildBuilding(int locX, int locY, Building building)
+	public void buildBuilding(int locX, int locY, Building building) //builds a building at the location
 	{
 		if (buildingsLeft == 0) {
 			JOptionPane.showMessageDialog(null, "You cannot build any more this turn!");
@@ -223,7 +223,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		this.repaint();
 	}
 	
-	public void buildUnit()
+	public void buildUnit() //builds a unit at the location
 	{
 		playerCiv.makeUnit(selectedLocation);
 		statusBar.update();
@@ -239,7 +239,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		return turn;
 	}
 
-	public static boolean gameEnd() {
+	public static boolean gameEnd() { //checks for the game ending (win or lose)
 		boolean done = false;
 		if (playerCiv.getHappiness() == 0) {
 			JOptionPane.showMessageDialog(null, "Your people have starved and destroyed your civilization in a series of riots..." +
@@ -312,7 +312,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 	
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) { //paint the board
 		super.paintComponent(g);
 		int incWidth = getWidth()/boardSizeY;
 		int incHeight = getHeight()/boardSizeX;
@@ -348,7 +348,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		yeti.draw(g, incWidth, incHeight, (int) yeti.getLocation().getX() * incHeight, (int) yeti.getLocation().getY() * incWidth);
 	}
 	
-	public void mapToGrid(int x, int y) {
+	public void mapToGrid(int x, int y) { //maps where the player has clicked
 		int incWidth = getWidth()/boardSizeY;
 		int incHeight = getHeight()/boardSizeX;
 		Point newLoc = new Point(y/incHeight, x/incWidth);
@@ -357,7 +357,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			this.repaint();
 		}
 	}
-	private void updateControlGUI( ) {
+	private void updateControlGUI( ) { //updates when the GUI is active/inactive
 		controlGUI.setAllToFalse();
 		// TODO select unit is needed
 		// consider land

@@ -13,7 +13,7 @@ import sticksAndStones.Direction;
 import sticksAndStones.GameManager;
 import sticksAndStones.MovementManager;
 
-public class Unit {
+public class Unit { //fighting units
 	private BufferedImage image;
 	private static BufferedImage warriorImage, yetiImage;
 	public enum UnitType {SOLDIER('S'), KNIGHT('K'), WARRIOR('W'), DEMON('D');
@@ -59,7 +59,7 @@ public class Unit {
 		moveCount = 2;
 	}
 	
-	private void setAttributes() {
+	private void setAttributes() { //gets different soldier depending on type provided
 		switch(unitType)
 		{
 		case SOLDIER: strength = 3; health = 10; break;
@@ -84,7 +84,7 @@ public class Unit {
 		return health;
 	}
 
-	public void move(Direction direction, GameManager game)
+	public void move(Direction direction, GameManager game) //uses logic to move unit
 	{
 		Point newPoint = MovementManager.moveTo(this, direction); 
 		if(newPoint.equals(position))

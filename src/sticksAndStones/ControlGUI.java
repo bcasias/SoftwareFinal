@@ -17,7 +17,7 @@ import buildings.ImprovementBuilding.BuildingType;
 
 import civilization.Civilization;
 
-public class ControlGUI extends JPanel{
+public class ControlGUI extends JPanel{ //gui that has all of the turn/building/unit buttons
 	private BuildingPanel buildingPanel;
 	private MovePanel movePanel;
 	private JButton nextTurn;
@@ -71,7 +71,7 @@ public class ControlGUI extends JPanel{
 		return buildingPanel;
 	}
 
-	class BuildingPanel extends JPanel
+	class BuildingPanel extends JPanel //holds all of the building options
 	{
 		private JButton newCity, newBarrack, newFarm, newMine, newSawmill, newTradingPost;
 		
@@ -134,7 +134,7 @@ public class ControlGUI extends JPanel{
 			newTradingPost.setEnabled(false);
 		}
 		
-		public class ButtonListener implements ActionListener {
+		public class ButtonListener implements ActionListener { //reads the input from each button
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -161,7 +161,7 @@ public class ControlGUI extends JPanel{
 		}
 	}
 	
-	class MovePanel extends JPanel
+	class MovePanel extends JPanel //holds movement controls
 	{
 
 		private JButton moveUp, moveRight, moveLeft, moveDown, newUnit;
@@ -196,7 +196,7 @@ public class ControlGUI extends JPanel{
 			moveRight.setEnabled(false);
 		}
 
-		public class ButtonListener implements ActionListener {
+		public class ButtonListener implements ActionListener { //buttons for movement/making units
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == moveUp) {
 							game.getPlayerCiv().getUnitAt(game.getSelectedLocation()).move(Direction.NORTH, game);
