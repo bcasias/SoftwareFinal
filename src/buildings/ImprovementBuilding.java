@@ -1,5 +1,6 @@
 package buildings;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,5 +27,10 @@ public class ImprovementBuilding extends Building {
 	public BuildingType getBuildingType()
 	{
 		return buildingType;
+	}
+	
+	public boolean isLocatedAt(Point loc)
+	{
+		return location.equals(loc);
 	}
 }

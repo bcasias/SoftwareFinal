@@ -244,6 +244,13 @@ public class Civilization {
 				return true;
 		return false;
 	}
+	
+	public boolean hasImprovementBuildingAt(Point point) {
+		for(ImprovementBuilding b : buildings)
+			if(b.isLocatedAt(point))
+				return true;
+		return false;
+	}
 
 	public City getCityAt(Point point) {
 		for(City c : cities)

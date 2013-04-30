@@ -14,6 +14,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import resource.Resource.ResourceType;
+
 import buildings.Building;
 import buildings.City;
 import buildings.ImprovementBuilding;
@@ -257,9 +259,23 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		}
 		else
 		{
-			if(map[selectedLocation.x][selectedLocation.y].getLandType() != LandType.MOUNTAIN && 
-			map[selectedLocation.x][selectedLocation.y].getLandType() != LandType.WATER)
-				controlGUI.makeBuildingTrue();
+			if(playerCiv.hasUnitAt(selectedLocation))
+			{
+				controlGUI.makeMoveControlTrue();
+			}
+			int x = (int) selectedLocation.getX();
+			int y = (int) selectedLocation.getY();
+			if (playerCiv.hasCityAt(selectedLocation)) return;
+			if (playerCiv.hasImprovementBuildingAt(selectedLocation)) return;
+			if (map[x][y].getLandType() == LandType.FOREST) controlGUI.getBuildingPanel().showSawmillButton();
+			if (map[x][y].getResourceType() == ResourceType.GOLD) controlGUI.getBuildingPanel().showMineButton();
+			if (map[x][y].getResourceType() == ResourceType.STONE) controlGUI.getBuildingPanel().showMineButton();
+			if (map[x][y].getResourceType() == ResourceType.FOOD) controlGUI.getBuildingPanel().showFarmButton();
+			if (map[x][y].getLandType() != LandType.MOUNTAIN && map[x][y].getLandType() != LandType.WATER) { //if buildable
+				controlGUI.getBuildingPanel().showCityButton();
+				controlGUI.getBuildingPanel().showBarrackButton();
+				controlGUI.getBuildingPanel().showTradingPostButton();
+			}
 		}
 	}
 

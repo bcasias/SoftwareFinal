@@ -62,13 +62,11 @@ public class ControlGUI extends JPanel{
 		movePanel.showMakeUnit();
 		
 	}
-
-	public void makeBuildingTrue() {
-		buildingPanel.showBuildingButtons();
-		
+	
+	public BuildingPanel getBuildingPanel() {
+		return buildingPanel;
 	}
 
-	
 	class BuildingPanel extends JPanel
 	{
 		private JButton newCity, newBarrack, newFarm, newMine, newSawmill, newTradingPost;
@@ -99,12 +97,27 @@ public class ControlGUI extends JPanel{
 			this.setVisible(true);
 		}
 
-		public void showBuildingButtons() {
+		public void showCityButton() {
 			newCity.setEnabled(true);
+		}
+		
+		public void showBarrackButton() {
 			newBarrack.setEnabled(true);
+		}
+		
+		public void showFarmButton() {
 			newFarm.setEnabled(true);
+		}
+		
+		public void showMineButton() {
 			newMine.setEnabled(true);
+		}
+		
+		public void showSawmillButton() {
 			newSawmill.setEnabled(true);
+		}
+		
+		public void showTradingPostButton() {
 			newTradingPost.setEnabled(true);
 		}
 
@@ -158,6 +171,12 @@ public class ControlGUI extends JPanel{
 			moveDown 		= new JButton("DOWN");
 			newUnit 		= new JButton("Make Unit");
 			
+			moveUp.addActionListener(new ButtonListener());
+			moveRight.addActionListener(new ButtonListener());
+			moveLeft.addActionListener(new ButtonListener());
+			moveDown.addActionListener(new ButtonListener());
+			newUnit.addActionListener(new ButtonListener());
+			
 			this.setLayout(new BorderLayout());
 			this.add(moveUp, BorderLayout.NORTH);
 			this.add(moveRight, BorderLayout.EAST);
@@ -169,9 +188,20 @@ public class ControlGUI extends JPanel{
 
 		public class ButtonListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (e.getSource() == moveUp) {
+					
+				} else if (e.getSource() == moveRight) {
+					
+				} else if (e.getSource() == moveLeft) {
+					
+				} else if (e.getSource() == moveDown) {
+					
+				} else if (e.getSource() == newUnit) {
+					
+				}
 			}
 		}
+		
 		public void showMakeUnit() {
 			newUnit.setEnabled(true);
 		}
