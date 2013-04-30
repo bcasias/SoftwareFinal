@@ -105,6 +105,7 @@ public class Unit {
 		game.updateStatus();
 		game.repaint();
 		game.setSelectedLocation(position);
+		if (moveCount <= 0) game.getControlGUI().makeMovementFalse();
 		return;
 	}
 	

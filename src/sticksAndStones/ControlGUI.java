@@ -57,6 +57,10 @@ public class ControlGUI extends JPanel{
 		movePanel.setMovementToTrue();
 		
 	}
+	
+	public void makeMovementFalse() {
+		movePanel.makeMovementFalse();
+	}
 
 	public void showMakeUnitButton() {
 		movePanel.showMakeUnit();
@@ -183,6 +187,13 @@ public class ControlGUI extends JPanel{
 			this.add(moveDown, BorderLayout.SOUTH);
 			this.add(newUnit, BorderLayout.CENTER);
 			this.setVisible(true);
+		}
+
+		public void makeMovementFalse() {
+			moveUp.setEnabled(false);
+			moveDown.setEnabled(false);
+			moveLeft.setEnabled(false);
+			moveRight.setEnabled(false);
 		}
 
 		public class ButtonListener implements ActionListener {

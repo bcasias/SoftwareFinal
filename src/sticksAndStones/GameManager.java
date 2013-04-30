@@ -119,6 +119,14 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		this.statusBar = statusBar;
 	}
 	
+	public StatusBar getStatusBar() {
+		return statusBar;
+	}
+
+	public ControlGUI getControlGUI() {
+		return controlGUI;
+	}
+
 	public class resizeListener extends ComponentAdapter {
 		public void componentResized(ComponentEvent e) {} //empty function forces size to update properly
 	}
@@ -201,6 +209,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			JOptionPane.showMessageDialog(null, "You cannot build any more this turn!");
 			return;
 		}
+		if (yeti.getLocation().equals(selectedLocation)) {
+			JOptionPane.showMessageDialog(null, "You can't build on the Yeti!");
+			return;
+		}
 		boolean built = playerCiv.makeBuilding(locX, locY, building);
 		if (built) {
 			buildingsLeft--;
@@ -244,12 +256,12 @@ public class GameManager extends JPanel { // this draws the board to the screen
 					"\nYou win!");
 			done = true;
 		}
-		else if (playerCiv.getGoldCount() > 100 && playerCiv.getStoneCount() > 100 && playerCiv.getWoodCount() > 100) {
+		else if (playerCiv.getGoldCount() > 200 && playerCiv.getStoneCount() > 200 && playerCiv.getWoodCount() > 200) {
 			JOptionPane.showMessageDialog(null, "Your stockpiles are so plentiful that your civilization is the envy of all..." +
 					"\nYou win!");
 			done = true;
 		} else if (yeti.getHealth() <= 0) {
-			JOptionPane.showMessageDialog(null, "You have slain the fearsome yeti, and saved your civilization from destruction!" +
+			JOptionPane.showMessageDialog(null, "You have slain the fearsome Yeti, and saved your civilization from destruction!" +
 					"\nYou win!");
 			done = true;
 		} else done = false;

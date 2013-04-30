@@ -190,10 +190,12 @@ public class StatusBar extends JPanel {
 					Integer.toString(yeti.getStrength()) + ", Health: " + Integer.toString(yeti.getHealth()) + "\n");
 			for(Unit u : units)
 			{
+				int moves = u.getMoveCount();
+				if (moves < 0) moves = 0;
 				unitList.setText( unitList.getText() + "X: " + Integer.toString(u.getLocation().x + 1) +
 						", Y: " + Integer.toString(u.getLocation().y + 1) + ", Strength: " + 
 						Integer.toString(u.getStrength()) + ", Health: " + Integer.toString(u.getHealth()) +
-						", Moves left: " + u.getMoveCount() + "\n");
+						", Moves left: " + moves + "\n");
 			}// end for
 			this.setBorder(new TitledBorder("Units:"));
 			this.setVisible(true);
