@@ -49,10 +49,9 @@ public class Civilization { //contains all of the methods for the player's civ
 		gatherResources();
 		consumeResources();
 		for (City c : cities) c.update();
-		for(Unit u : units)
-		{
-			u.update();
-		}
+		for(Unit u : units) u.update();
+		if (foodCount > 100) foodCount = 100;
+		if (foodCount < 0) foodCount = 0;
 	}
 
 	public boolean makeBuilding(int locx, int locy, Building building) { //makes a building for the civ

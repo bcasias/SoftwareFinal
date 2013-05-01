@@ -17,6 +17,7 @@ import resource.Resource.ResourceType;
 import buildings.Building;
 import buildings.City;
 import buildings.ImprovementBuilding;
+import buildings.City.CityType;
 import buildings.ImprovementBuilding.BuildingType;
 
 import civilization.Civilization;
@@ -223,6 +224,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 
 	public void buildUnit() //builds a unit at the location
 	{
+		if (playerCiv.getGoldCount() < 5) {
+			JOptionPane.showMessageDialog(null, "You do not have enough gold to build a unit!");
+			return;
+		}
 		playerCiv.makeUnit(selectedLocation);
 		statusBar.update();
 		controlGUI.setAllToFalse();
@@ -238,6 +243,10 @@ public class GameManager extends JPanel { // this draws the board to the screen
 	}
 
 	public static boolean gameEnd() { //checks for the game ending (win or lose)
+		int numTowns = 0;
+		for (City c : playerCiv.getCities()) {
+			if (c.getCityType() == CityType.TOWN || c.getCityType() == CityType.CITY) numTowns++;
+		}
 		boolean done = false;
 		if (playerCiv.getHappiness() == 0) {
 			JOptionPane.showMessageDialog(null, "Your people have starved and destroyed your civilization in a series of riots..." +
@@ -247,7 +256,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			JOptionPane.showMessageDialog(null, "You have taken too long to develop, and the fierce Yeti has destroyed your civilization!" +
 					"\nYou lose!");
 			done = true; //lose on turn 100 if not winning
-		} else if (playerCiv.getLand().size() > 9) {
+		} else if (numTowns > 9) {
 			JOptionPane.showMessageDialog(null, "You have developed your civilization into a sprawling empire, one that will stand the test of time!" +
 					"\nYou win!");
 			done = true; //win if 10 cities built
@@ -351,9 +360,8 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			this.repaint();
 		}
 	}
-	private void updateControlGUI( ) { //updates when the GUI is active/inactive
+	public void updateControlGUI() { //updates when the GUI is active/inactive
 		controlGUI.setAllToFalse();
-		// TODO select unit is needed
 		// consider land
 		// producing material
 		if(playerCiv.hasCityAt(selectedLocation))

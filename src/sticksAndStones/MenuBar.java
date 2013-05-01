@@ -52,10 +52,10 @@ public class MenuBar extends JMenuBar {
 		"and wood for Forest). Also, if a city is on a resource square, it will gather that resource as well (i.e. gold).\n" +
 		"Build mines to gather gold and stone, sawmills to gather wood, and farms to gather food.\n\n" +
 		"There are three win conditions: \n" +
-		"* Build 10 cities \n" +
+		"* Have 10 villages grow into towns \n" +
 		"* Gather 200 wood, stone, and gold\n" +
 		"* Kill the yeti\n\n" +
-		"There are also 2 loss conditions:\n\n" +
+		"There are also 2 loss conditions:\n" +
 		"* Reach 0 happiness through starvation\n" +
 		"* Reach turn 100, when the Yeti destroys your civilization\n\n" +
 		"Good luck, and build a civilization that will survive through the ages!");
