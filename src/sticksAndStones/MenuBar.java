@@ -53,7 +53,7 @@ public class MenuBar extends JMenuBar {
 		"Build mines to gather gold and stone, sawmills to gather wood, and farms to gather food.\n\n" +
 		"There are three win conditions: \n" +
 		"* Have 10 villages grow into towns \n" +
-		"* Gather 200 wood, stone, and gold\n" +
+		"* Gather 500 wood, stone, and gold\n" +
 		"* Kill the yeti\n\n" +
 		"There are also 2 loss conditions:\n" +
 		"* Reach 0 happiness through starvation\n" +

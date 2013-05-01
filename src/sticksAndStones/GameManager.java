@@ -260,7 +260,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			JOptionPane.showMessageDialog(null, "You have developed your civilization into a sprawling empire, one that will stand the test of time!" +
 					"\nYou win!");
 			done = true; //win if 10 cities built
-		} else if (playerCiv.getGoldCount() > 200 && playerCiv.getStoneCount() > 200 && playerCiv.getWoodCount() > 200) {
+		} else if (playerCiv.getGoldCount() > 500 && playerCiv.getStoneCount() > 500 && playerCiv.getWoodCount() > 500) {
 			JOptionPane.showMessageDialog(null, "Your stockpiles are so plentiful that your civilization is the envy of all..." +
 					"\nYou win!");
 			done = true; //win by gathering resources
