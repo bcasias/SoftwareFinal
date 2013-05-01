@@ -190,13 +190,13 @@ public class GameManager extends JPanel { // this draws the board to the screen
 		if(playerCiv.hasUnitAt(up))
 		{
 			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(up));
-		} else if(playerCiv.hasUnitAt(down))
+		} if(playerCiv.hasUnitAt(down))
 		{
 			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(down));
-		}else if(playerCiv.hasUnitAt(left))
+		} if(playerCiv.hasUnitAt(left))
 		{
 			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(left));
-		}else if(playerCiv.hasUnitAt(right))
+		} if(playerCiv.hasUnitAt(right))
 		{
 			MovementManager.attackUnit(yeti, playerCiv.getUnitAt(right));
 		}
