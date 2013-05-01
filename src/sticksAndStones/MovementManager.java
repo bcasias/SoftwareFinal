@@ -59,6 +59,7 @@ public class MovementManager { //movement logic, static class
 		}
 		game.repaint();
 		game.updateStatus();
+		game.updateControlGUI();
 		return endPoint;
 	} // end function
 

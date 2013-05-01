@@ -391,6 +391,7 @@ public class GameManager extends JPanel { // this draws the board to the screen
 			if (playerCiv.hasCityAt(selectedLocation)) return;
 			if (playerCiv.hasImprovementBuildingAt(selectedLocation)) return;
 			if (buildingsLeft == 0) return;
+			if (yeti.getLocation().equals(selectedLocation)) return;
 			if (map[x][y].getLandType() == LandType.FOREST) controlGUI.getBuildingPanel().showSawmillButton();
 			if (map[x][y].getResourceType() == ResourceType.GOLD) controlGUI.getBuildingPanel().showMineButton();
 			if (map[x][y].getResourceType() == ResourceType.STONE) controlGUI.getBuildingPanel().showMineButton();
