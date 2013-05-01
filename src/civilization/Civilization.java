@@ -50,7 +50,7 @@ public class Civilization { //contains all of the methods for the player's civ
 		consumeResources();
 		for (City c : cities) c.update();
 		for(Unit u : units) u.update();
-		if (foodCount > 100) foodCount = 100;
+		if (foodCount > 150) foodCount = 150;
 		if (foodCount < 0) foodCount = 0;
 	}
 
